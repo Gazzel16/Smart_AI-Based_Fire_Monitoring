@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "696549198550",
+    "firebase_url": "https://smart-ai-based-fire-monitoring-default-rtdb.firebaseio.com",
+    "project_id": "smart-ai-based-fire-monitoring",
+    "storage_bucket": "smart-ai-based-fire-monitoring.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:696549198550:android:009af7e554ee2d2d2fd777",
+        "android_client_info": {
+          "package_name": "com.example.smartai_basedfiremonitoring"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBoGpuYasFuGyYW7DqcpSJOhRuPCNt3L6s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
