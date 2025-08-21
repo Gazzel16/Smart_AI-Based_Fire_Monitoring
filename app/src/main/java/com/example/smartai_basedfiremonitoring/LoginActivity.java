@@ -99,9 +99,9 @@ public class LoginActivity extends AppCompatActivity {
                 if (found) {
                     Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
                     // Navigate to main activity
-//                    Intent intent = new Intent(LoginActivity.this, MainActivity.class); // replace with your main activity
-//                    startActivity(intent);
-//                    finish();
+                   Intent intent = new Intent(LoginActivity.this, UserDashboardActivity.class); // replace with your main activity
+                    startActivity(intent);
+                    finish();
                 } else {
                     Toast.makeText(LoginActivity.this, "Invalid username or phone number", Toast.LENGTH_SHORT).show();
                 }
