@@ -6,23 +6,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserDashboardActivity">
-
-
-
-  <com.google.android.material.bottomnavigation.BottomNavigationView
-      android:id="@+id/bottom_navigation"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      app:itemIconTint="#6A77FF"
-      app:itemTextColor="#6A77FF"
-      app:labelVisibilityMode="labeled"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.0"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintVertical_bias="1.0"
-      app:menu="@menu/bottom_nav_menu" />
+    tools:context=".UserDashboardFragment">
 
   <androidx.constraintlayout.widget.ConstraintLayout
       android:id="@+id/constraintLayout"
@@ -81,8 +65,8 @@
   <ScrollView
       android:layout_width="0dp"
       android:layout_height="0dp"
-      app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
       android:padding="7dp"
+      app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
@@ -115,34 +99,6 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="40dp"
-                android:fontFamily="@font/fir_sans_italic"
-                android:text="Flame Monitoring: "
-                android:textColor="#FA7F57"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/flameDetector"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="12dp"
-                android:background="@drawable/outline_border_round"
-                android:fontFamily="@font/fir_sans_italic"
-                android:padding="8dp"
-                android:text="Fire Detected: Warning"
-                android:textColor="#F80505"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
 
             <ImageView
                 android:id="@+id/imageView"
@@ -152,8 +108,54 @@
                 android:src="@drawable/flame_logo"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView"
+                app:layout_constraintStart_toEndOf="@+id/linearLayout6"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="36dp"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+              <TextView
+                  android:id="@+id/textView"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:fontFamily="@font/fir_sans_italic"
+                  android:text="Flame Monitoring: "
+                  android:textColor="#FA7F57"
+                  android:textSize="20sp"
+                  android:textStyle="bold"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintTop_toTopOf="parent" />
+
+              <TextView
+                  android:id="@+id/flameOutput"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="12dp"
+                  android:fontFamily="@font/fir_sans_italic"
+                  android:textColor="#FA7F57"
+                  android:text="AO: 1000" />
+
+              <TextView
+                  android:id="@+id/flameDetector"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="4dp"
+                  android:background="@drawable/outline_border_round"
+                  android:fontFamily="@font/fir_sans_italic"
+                  android:padding="8dp"
+                  android:text="Fire Detected: Warning"
+                  android:textColor="#F80505"
+                  android:textStyle="bold"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintTop_toBottomOf="@+id/textView" />
+            </LinearLayout>
           </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
@@ -420,18 +422,18 @@
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:fontFamily="@font/fir_sans_italic"
-                  android:text="Flame Monitoring: "
+                  android:text="Smoke Monitoring: "
                   android:textColor="#FFF3E0"
                   android:textSize="20sp"
                   android:textStyle="bold" />
 
               <TextView
-                  android:id="@+id/smokeLevel"
+                  android:id="@+id/smokeOutput"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:layout_marginTop="8dp"
                   android:fontFamily="@font/fir_sans_italic"
-                  android:text="100 ppm CO"
+                  android:text="AO: 1000"
                   android:textColor="#FFF3E0"
                   android:textSize="15sp"
                   android:textStyle="bold" />

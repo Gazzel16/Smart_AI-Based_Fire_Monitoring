@@ -51,7 +51,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/textView3">
 
                         <TextView
-                            android:id="@+id/tvUsername"
+                            android:id="@+id/tvEmail"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -59,13 +59,12 @@
                             android:textColor="@color/black" />
 
                         <EditText
-                            android:id="@+id/username"
+                            android:id="@+id/email"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:background="@drawable/input_border"
                             android:ems="10"
-                            android:hint="John Doe"
                             android:inputType="text"
                             android:padding="10dp" />
                     </LinearLayout>
@@ -81,21 +80,20 @@
                         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
                         <TextView
-                            android:id="@+id/tvPhoneNumber"
+                            android:id="@+id/tvPassword"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Phone No."
+                            android:text="Password"
                             android:textColor="@color/black" />
 
                         <EditText
-                            android:id="@+id/phoneNumber"
+                            android:id="@+id/password"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:background="@drawable/input_border"
                             android:ems="10"
-                            android:hint="eg.09156042755"
-                            android:inputType="text"
+                            android:inputType="textPassword"
                             android:padding="10dp" />
                     </LinearLayout>
 

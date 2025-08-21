@@ -3,7 +3,6 @@ package com.example.smartai_basedfiremonitoring.Model;
 public class User {
     public String id;
     public String username;
-    public  String phoneNumber;
 
     public String email;
 
@@ -11,10 +10,9 @@ public class User {
 
     }
 
-    public User(String id,String username,String phoneNumber, String email){
+    public User(String id,String username, String email){
         this.id = id;
         this.username = username;
-        this.phoneNumber = phoneNumber;
         this.email = email;
     }
 
@@ -34,13 +32,6 @@ public class User {
         this.username = username;
     }
 
-    //getter&setter for phoneNumber
-    public String getPhoneNumber(){
-        return phoneNumber;
-    }
-    public void setPhoneNumber(String phoneNumber){
-        this.phoneNumber = phoneNumber;
-    }
 
     //getter&setter for email
     public String getEmail(){
