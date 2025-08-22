@@ -36,8 +36,7 @@
 
             smokeOutput = view.findViewById(R.id.smokeOutput);
             smokeStatus = view.findViewById(R.id.smokeStatus);
-
-            FlameSensor.flameMonitoring(flameOutput, flameDetector);
+            FlameSensor.flameMonitoring(flameOutput, flameDetector, this);
 
             return view;
         }
