@@ -15,7 +15,20 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:id="@+id/geminiAdvisory"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginEnd="16dp"
+            android:layout_gravity="top|end"
+            android:background="@drawable/circle_outline_border"
+            android:contentDescription="Draggable Icon"
+            android:elevation="20dp"
+            android:src="@drawable/gemini_icon" />
+    </FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"

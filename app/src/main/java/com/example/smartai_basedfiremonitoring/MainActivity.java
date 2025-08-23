@@ -1,6 +1,9 @@
 package com.example.smartai_basedfiremonitoring;
 
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,8 +20,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
-
-
         // Load Home by default
         if (savedInstanceState == null) {
             loadFragment(new UserSensorDashboardFragment());
@@ -50,8 +51,36 @@ public class MainActivity extends AppCompatActivity {
             }
             return false;
         });
+
+        getAdviceFromGemini();
     }
 
+    private void getAdviceFromGemini(){
+        ImageView geminiAdvisory = findViewById(R.id.geminiAdvisory);
+        geminiAdvisory.setOnTouchListener(new View.OnTouchListener() {
+            float dX, dY;
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        dX = v.getX() - event.getRawX();
+                        dY = v.getY() - event.getRawY();
+                        return true;
+
+                    case MotionEvent.ACTION_MOVE:
+                        v.setX(event.getRawX() + dX);
+                        v.setY(event.getRawY() + dY);
+                        return true;
+
+                    default:
+                        return false;
+                }
+            }
+        });
+
+        geminiAdvisory.bringToFront();
+        geminiAdvisory.invalidate();
+    }
     private void loadFragment(Fragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()
