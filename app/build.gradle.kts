@@ -55,5 +55,7 @@ dependencies {
     implementation("com.google.firebase:firebase-database:20.2.2")
     implementation("com.google.firebase:firebase-auth:22.1.0")
 
+    implementation("com.google.firebase:firebase-messaging:23.3.0")
+
 
 }
