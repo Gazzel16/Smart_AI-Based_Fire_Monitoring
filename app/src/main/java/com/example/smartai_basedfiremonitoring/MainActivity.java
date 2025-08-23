@@ -4,9 +4,6 @@ import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -24,14 +21,14 @@ public class MainActivity extends AppCompatActivity {
 
         // Load Home by default
         if (savedInstanceState == null) {
-            loadFragment(new UserDashboardFragment());
+            loadFragment(new UserSensorDashboardFragment());
         }
 
         bottomNav.setOnItemSelectedListener(item -> {
             Fragment selectedFragment = null;
 
             if (item.getItemId() == R.id.nav_dashboard) {
-                selectedFragment = new UserDashboardFragment();
+                selectedFragment = new UserSensorDashboardFragment();
             }
 
             if (item.getItemId() == R.id.nav_home) {
