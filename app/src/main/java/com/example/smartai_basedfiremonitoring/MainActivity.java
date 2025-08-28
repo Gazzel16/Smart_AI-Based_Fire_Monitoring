@@ -9,6 +9,8 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.example.smartai_basedfiremonitoring.Gemini.GeminiAdvisory;
+import com.example.smartai_basedfiremonitoring.Gemini.GeminiAdvisoryDialog;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -57,6 +59,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void getAdviceFromGemini(){
         ImageView geminiAdvisory = findViewById(R.id.geminiAdvisory);
+
+        geminiAdvisory.setOnClickListener(v -> {
+            GeminiAdvisoryDialog dialog = new GeminiAdvisoryDialog();
+            dialog.show(getSupportFragmentManager(), "GeminiDialog");
+
+            GeminiAdvisory.geminiAdvisory(this, dialog);  // ✅ now passing both args
+        });
+
         geminiAdvisory.setOnTouchListener(new View.OnTouchListener() {
             float dX, dY;
             @Override
@@ -65,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                     case MotionEvent.ACTION_DOWN:
                         dX = v.getX() - event.getRawX();
                         dY = v.getY() - event.getRawY();
-                        return true;
+                        return false;
 
                     case MotionEvent.ACTION_MOVE:
                         v.setX(event.getRawX() + dX);

@@ -45,6 +45,7 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.cardview)
     implementation(libs.volley)
+    implementation(libs.androidx.recyclerview)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -56,6 +57,7 @@ dependencies {
     implementation("com.google.firebase:firebase-auth:22.1.0")
 
     implementation("com.google.firebase:firebase-messaging:23.3.0")
+    implementation("com.airbnb.android:lottie:6.0.0")
 
 
 }
