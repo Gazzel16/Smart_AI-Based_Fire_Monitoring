@@ -35,9 +35,7 @@ public class GeminiAdvisoryDialog extends DialogFragment {
         adapter = new GeminiAdvisoryAdapter(advisoryList);
         recyclerView.setAdapter(adapter);
 
-        builder.setView(view)
-                .setTitle("Gemini Fire Advisory")
-                .setPositiveButton("Close", (dialog, which) -> dismiss());
+        builder.setView(view);
 
         return builder.create();
     }

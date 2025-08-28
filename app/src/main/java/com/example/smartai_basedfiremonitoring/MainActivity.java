@@ -1,6 +1,8 @@
 package com.example.smartai_basedfiremonitoring;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -9,6 +11,8 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.airbnb.lottie.Lottie;
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.smartai_basedfiremonitoring.Gemini.GeminiAdvisory;
 import com.example.smartai_basedfiremonitoring.Gemini.GeminiAdvisoryDialog;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -59,12 +63,26 @@ public class MainActivity extends AppCompatActivity {
 
     private void getAdviceFromGemini(){
         ImageView geminiAdvisory = findViewById(R.id.geminiAdvisory);
+        LottieAnimationView geminiLottie = findViewById(R.id.geminiLottie);
 
         geminiAdvisory.setOnClickListener(v -> {
-            GeminiAdvisoryDialog dialog = new GeminiAdvisoryDialog();
-            dialog.show(getSupportFragmentManager(), "GeminiDialog");
+            // 1. Show Lottie now
+            geminiLottie.setVisibility(View.VISIBLE);
+            geminiLottie.playAnimation();
 
-            GeminiAdvisory.geminiAdvisory(this, dialog);  // ✅ now passing both args
+            // 2. Delay 2s, then hide Lottie + show dialog
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                geminiLottie.cancelAnimation();
+                geminiLottie.setVisibility(View.GONE);
+
+                // 3. Show dialog
+                GeminiAdvisoryDialog dialog = new GeminiAdvisoryDialog();
+                dialog.show(getSupportFragmentManager(), "GeminiDialog");
+
+                // 4. Start HTTP request
+                GeminiAdvisory.geminiAdvisory(this, dialog);
+
+            }, 2000); // wait 2 seconds
         });
 
         geminiAdvisory.setOnTouchListener(new View.OnTouchListener() {
