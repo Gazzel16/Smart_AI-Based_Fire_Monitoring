@@ -42,6 +42,14 @@ public class GeminiAdvisoryDialog extends DialogFragment {
 
     // Call this to update RecyclerView when new advisory comes
     public void addAdvisory(GeminiAdvisoryModel advisory) {
+
+        if (!advisoryList.isEmpty()){
+            GeminiAdvisoryModel lastReading = advisoryList.get(advisoryList.size() -1);
+
+            if (lastReading.getDescription().equals(advisory.getDescription())){
+                return;
+            }
+        }
         advisoryList.add(advisory);
         if (adapter != null) {
             adapter.notifyItemInserted(advisoryList.size() - 1);

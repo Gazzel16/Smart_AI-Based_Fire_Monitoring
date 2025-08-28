@@ -24,10 +24,23 @@ public class GeminiAdvisory {
 
     private static boolean isDataLoaded = false;
     private static GeminiAdvisoryDialog advisoryDialog;
+
+    private static long lastCallTime = 0;
+    private static final long MIN_INTERVAL = 10_000;
     public static boolean getIsDataLoaded() {
         return isDataLoaded;
     }
     public static void  geminiAdvisory(Context context, GeminiAdvisoryDialog geminiAdvisoryDialog){
+
+        //Reads the Output eveery 10 seconds
+        long now = System.currentTimeMillis();
+
+        if (now - lastCallTime < MIN_INTERVAL){
+            return;
+        }
+
+        lastCallTime = now;
+
         advisoryDialog = geminiAdvisoryDialog;
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("sensors");

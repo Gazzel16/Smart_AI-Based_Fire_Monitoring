@@ -2,7 +2,9 @@ package com.example.smartai_basedfiremonitoring.Sensors;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.widget.TextView;
@@ -12,7 +14,9 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 
+import com.example.smartai_basedfiremonitoring.MainActivity;
 import com.example.smartai_basedfiremonitoring.R;
+import com.example.smartai_basedfiremonitoring.Utils.SoundManager;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,9 +42,10 @@ public class TempSensor {
                     tempStatus.setText("Critical Temperature!");
                     tempStatus.setTextColor(fragment.getResources().getColor(android.R.color.holo_red_dark));
 
-                    // Play critical alert sound
-                    mediaPlayer = MediaPlayer.create(fragment.getContext(), R.raw.critical_temp_voiceline);
-                    mediaPlayer.start();
+                    Context context = fragment.getContext();
+                    if (context != null) {
+                        SoundManager.getInstance(context).playSound(R.raw.critical_temp_voiceline);
+                    }
 
                     showNotification(fragment.getContext(),
                             "🔥 Critical Temperature Alert!",
@@ -50,9 +55,11 @@ public class TempSensor {
                     tempStatus.setText("High Temperature!");
                     tempStatus.setTextColor(fragment.getResources().getColor(android.R.color.black));
 
-                    // Play high temperature alert sound
-                    mediaPlayer = MediaPlayer.create(fragment.getContext(), R.raw.high_temp_voiceline);
-                    mediaPlayer.start();
+                    Context context = fragment.getContext();
+                    if (context != null) {
+                        SoundManager.getInstance(context).playSound(R.raw.high_temp_voiceline);
+                    }
+
 
                     showNotification(fragment.getContext(),
                             "⚠️ High Temperature!",
@@ -88,6 +95,7 @@ public class TempSensor {
                 notificationManager.createNotificationChannel(channel);
             }
         }
+
 
         // Build the notification
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, channelId)

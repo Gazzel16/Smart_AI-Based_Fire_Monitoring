@@ -39,7 +39,6 @@
 
             FlameSensor.flameMonitoring(flameOutput, flameDetector, this);
             TempSensor.tempMonitoring(tempAnalogOutput, tempStatus, this);
-
             HumidSensor.humidMonitoring(humidAnalogOutput, humidStatus, this);
 
             return view;
