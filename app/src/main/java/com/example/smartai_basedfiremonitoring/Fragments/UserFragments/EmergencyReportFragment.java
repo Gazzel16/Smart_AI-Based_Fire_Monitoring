@@ -32,6 +32,12 @@ public class EmergencyReportFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_emergency_report, container, false);
 
+        EmergencyReport(view);
+
+        return  view;
+    }
+
+    public void EmergencyReport(View view){
         EditText inputReport = view.findViewById(R.id.inputReport);
         Button reportBtn = view.findViewById(R.id.reportBtn);
 
@@ -39,52 +45,49 @@ public class EmergencyReportFragment extends Fragment {
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("users");
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        // Handle button click
         reportBtn.setOnClickListener(v -> {
             String description = inputReport.getText().toString().trim();
 
-            if (description.isEmpty()) {
-                Toast.makeText(getContext(), "Please enter details", Toast.LENGTH_SHORT).show();
+            if (description.isEmpty()){
+                Toast.makeText(getContext(), "Pls fill the input", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            if (currentUser != null) {
+            if (currentUser != null){
+
                 String userId = currentUser.getUid();
-                String reportId = dbRef.child(userId).child("reports").push().getKey();
+                String reportedId = dbRef.child(userId).child("reports").push().getKey();
 
                 DatabaseReference userRef = dbRef.child(userId);
-                userRef.get().addOnSuccessListener(snapshot -> {
-                   User user = snapshot.getValue(User.class);
 
-                    // force timezone to Asia/Manila (Philippines)
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-                    sdf.setTimeZone(TimeZone.getTimeZone("Asia/Manila"));
-                    String currentDateTimePH = sdf.format(new Date());
+                userRef.get().addOnSuccessListener(snapShot -> {
 
-                   if (user != null){
-                       String reporterName = user.getUsername();
-                       FireReport fireReport = new FireReport(
-                               reporterName,
-                               false, // confirmation default
-                               description,
-                               currentDateTimePH
-                       );
+                    User user = snapShot.getValue(User.class);
 
-                       dbRef.child(userId).child("reports").child(reportId).setValue(fireReport)
-                               .addOnSuccessListener(aVoid -> {
-                                   Toast.makeText(getContext(), "Report submitted!", Toast.LENGTH_SHORT).show();
-                                   inputReport.setText(""); // clear input
-                               })
-                               .addOnFailureListener(e ->
-                                       Toast.makeText(getContext(), "Failed: " + e.getMessage(), Toast.LENGTH_SHORT).show()
-                               );
-                   }
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+                    simpleDateFormat.setTimeZone(TimeZone.getTimeZone("Asia/Manila"));
+                    String currentDateTime = simpleDateFormat.format(new Date());
+
+                    if (user != null){
+                        String reporterName = user.getUsername();
+                        FireReport fireReport = new FireReport(
+                                reporterName,
+                                false,
+                                description,
+                                currentDateTime
+                        );
+
+                        dbRef.child(userId).child("reports").child(reportedId).setValue(fireReport)
+                                .addOnSuccessListener(aVoid -> {
+                                    Toast.makeText(getContext(), "Reported submitted", Toast.LENGTH_SHORT).show();
+                                    inputReport.setText("");
+                                }).addOnFailureListener(e -> {
+                                    Toast.makeText(getContext(), "Failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                });
+                    }
+
                 });
-
             }
         });
-
-
-        return  view;
     }
 }
