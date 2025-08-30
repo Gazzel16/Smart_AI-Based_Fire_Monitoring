@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -21,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class ProfileFragment extends Fragment {
 
     private EditText name, email, password;
+    private Button saveBtn;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -35,6 +37,7 @@ public class ProfileFragment extends Fragment {
         name = view.findViewById(R.id.name);
         email = view.findViewById(R.id.email);
         password = view.findViewById(R.id.password);
+        saveBtn = view.findViewById(R.id.saveBtn);
 
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users");
@@ -53,12 +56,51 @@ public class ProfileFragment extends Fragment {
                 Toast.makeText(getContext(), "Failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             });
 
-
-
-
         }
 
-
+        saveBtn.setOnClickListener(v -> {
+            UpdateDetails();
+        });
 
     }
+
+    public void UpdateDetails(){
+
+        String newName = name.getText().toString().trim();
+        String newEmail = email.getText().toString().trim();
+        String newPassword = password.getText().toString().trim();
+
+        if (newName.isEmpty() || newEmail.isEmpty()) {
+            Toast.makeText(getContext(), "Fields cannot be empty", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users");
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        String userId = currentUser.getUid();
+        User updatedUser = new User(userId, newName, newEmail);
+
+        databaseReference.child(userId).setValue(updatedUser)
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(getContext(), "Profile updated!", Toast.LENGTH_SHORT).show();
+                }).addOnFailureListener(e ->{
+                    Toast.makeText(getContext(), "Failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+
+        currentUser.updateEmail(newEmail).addOnCompleteListener(task -> {
+           if (task.isSuccessful()){
+               Toast.makeText(getContext(), "Email updated", Toast.LENGTH_SHORT).show();
+           }
+        });
+
+        if (!newPassword.isEmpty()) {
+            currentUser.updatePassword(newPassword).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    Toast.makeText(getContext(), "Password updated", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    }
+
 }
