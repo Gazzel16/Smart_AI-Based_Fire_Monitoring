@@ -1,4 +1,4 @@
-    package com.example.smartai_basedfiremonitoring;
+    package com.example.smartai_basedfiremonitoring.Fragments.UserFragments;
 
     import android.os.Bundle;
     import android.view.LayoutInflater;
@@ -10,6 +10,7 @@
     import androidx.annotation.Nullable;
     import androidx.fragment.app.Fragment;
 
+    import com.example.smartai_basedfiremonitoring.R;
     import com.example.smartai_basedfiremonitoring.Sensors.FlameSensor;
     import com.example.smartai_basedfiremonitoring.Sensors.HumidSensor;
     import com.example.smartai_basedfiremonitoring.Sensors.TempSensor;

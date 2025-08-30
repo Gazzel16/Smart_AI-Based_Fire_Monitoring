@@ -14,7 +14,7 @@ android {
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
-
+        vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -58,6 +58,8 @@ dependencies {
 
     implementation("com.google.firebase:firebase-messaging:23.3.0")
     implementation("com.airbnb.android:lottie:6.0.0")
+
+    implementation("de.hdodenhof:circleimageview:3.1.0")
 
 
 }

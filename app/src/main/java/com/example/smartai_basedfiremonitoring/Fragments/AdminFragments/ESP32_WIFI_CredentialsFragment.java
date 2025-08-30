@@ -1,4 +1,4 @@
-package com.example.smartai_basedfiremonitoring;
+package com.example.smartai_basedfiremonitoring.Fragments.AdminFragments;
 
 import android.os.Bundle;
 
@@ -8,15 +8,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class SettingsFragment extends Fragment {
+import com.example.smartai_basedfiremonitoring.R;
+
+public class ESP32_WIFI_CredentialsFragment extends Fragment {
+
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_settings, container, false);
-
-        return  view;
+        return inflater.inflate(R.layout.fragment_esp32_wifi_credentials, container, false);
     }
 }

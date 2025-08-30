@@ -4,129 +4,110 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SettingsFragment">
+    android:fitsSystemWindows="true"
+    tools:context=".Fragments.UserFragments.SettingsFragment">
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="0dp">
+    android:layout_height="wrap_content">
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottieAnimationView"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/emergency_btn" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout7"
+    <TextView
+        android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:background="@drawable/outline_border_round"
-        android:backgroundTint="#FFF3E0"
-        android:orientation="vertical"
+        android:padding="15dp"
+        android:text="Settings"
+        android:background="#343F7E"
+        android:fontFamily="@font/fir_sans_italic"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lottieAnimationView">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:fontFamily="sans-serif-condensed-medium"
-            android:text="Emergency Button Description"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="12dp"
-            android:background="@drawable/edittext_background"
-            android:fontFamily="@font/fir_sans_italic"
-            android:padding="12dp"
-            android:text="This button is strictly for emergency use only.
-If the sensor fails to detect an incident and you are the first to notice, press this button immediately.
-Once pressed, it will send an alert to the admin so action can be taken quickly." />
-
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="12dp"
-            android:background="@drawable/edittext_background"
-            android:fontFamily="@font/fir_sans_italic"
-            android:padding="12dp"
-            android:text="⚠️ Important: Do not press this button as a prank or for non-emergency situations. Misuse may delay real emergency responses and you may receive a call from the barangay." />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:id="@+id/profile"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/outline_border_round"
-            android:backgroundTint="#FFF3E0"
-            android:orientation="vertical">
+            android:layout_marginTop="8dp"
+            android:foregroundGravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:src="@drawable/user_icon"
+                android:tint="#1676A4" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:fontFamily="sans-serif-condensed-medium"
-                android:text="Emergency Hotline"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:text="Edit Profile"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/emergency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:foregroundGravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:src="@drawable/warning_icon"
+                android:tint="#1676A4" />
 
             <TextView
-                android:id="@+id/textView10"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="12dp"
-                android:background="@drawable/edittext_background"
-                android:fontFamily="@font/fir_sans_italic"
-                android:padding="12dp"
-                android:text="Hotline: 137-175"
-                android:textStyle="bold" />
+                android:layout_margin="8dp"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:text="Emergency"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:foregroundGravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:src="@drawable/logout" />
 
             <TextView
-                android:id="@+id/textView10"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="12dp"
-                android:background="@drawable/edittext_background"
-                android:fontFamily="@font/fir_sans_italic"
-                android:padding="12dp"
-                android:text="Hotline Smart: 0921-542-7123"
-                android:textStyle="bold" />
+                android:layout_margin="8dp"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:text="Logout"
+                android:textSize="18sp" />
 
-            <TextView
-                android:id="@+id/textView10"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="12dp"
-                android:background="@drawable/edittext_background"
-                android:fontFamily="@font/fir_sans_italic"
-                android:padding="12dp"
-                android:text="Hotline Globe: 0927-257-9322"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/textView10"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="12dp"
-                android:background="@drawable/edittext_background"
-                android:fontFamily="@font/fir_sans_italic"
-                android:padding="12dp"
-                android:text="BDDRM/FIRE: 8-660-01-44"
-                android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
 

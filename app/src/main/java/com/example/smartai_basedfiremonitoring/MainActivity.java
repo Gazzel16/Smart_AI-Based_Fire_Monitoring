@@ -11,8 +11,10 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import com.airbnb.lottie.Lottie;
 import com.airbnb.lottie.LottieAnimationView;
+import com.example.smartai_basedfiremonitoring.Fragments.UserFragments.FireUpdateFragment;
+import com.example.smartai_basedfiremonitoring.Fragments.UserFragments.SettingsFragment;
+import com.example.smartai_basedfiremonitoring.Fragments.UserFragments.UserSensorDashboardFragment;
 import com.example.smartai_basedfiremonitoring.Gemini.GeminiAdvisory;
 import com.example.smartai_basedfiremonitoring.Gemini.GeminiAdvisoryDialog;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
+
         // Load Home by default
         if (savedInstanceState == null) {
             loadFragment(new UserSensorDashboardFragment());
@@ -38,18 +41,13 @@ public class MainActivity extends AppCompatActivity {
                 selectedFragment = new UserSensorDashboardFragment();
             }
 
-            if (item.getItemId() == R.id.nav_home) {
-                selectedFragment = new HomeFragment();
-            }
-
             if (item.getItemId() == R.id.nav_settings) {
                 selectedFragment = new SettingsFragment();
             }
 
-
-            // else if (item.getItemId() == R.id.nav_home) {
-            //     selectedFragment = new HomeFragment();
-            // }
+            if (item.getItemId() == R.id.fireUpdate) {
+                selectedFragment = new FireUpdateFragment();
+            }
 
             if (selectedFragment != null) {
                 loadFragment(selectedFragment);
