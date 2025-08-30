@@ -14,11 +14,14 @@
     import com.example.smartai_basedfiremonitoring.Sensors.FlameSensor;
     import com.example.smartai_basedfiremonitoring.Sensors.HumidSensor;
     import com.example.smartai_basedfiremonitoring.Sensors.TempSensor;
+    import com.google.firebase.database.ValueEventListener;
 
     public class UserSensorDashboardFragment extends Fragment {
 
         TextView flameOutput, flameDetector,tempAnalogOutput,
                 tempStatus, humidAnalogOutput, humidStatus, smokeOutput, smokeStatus;
+
+        private static ValueEventListener tempListener;
         @Nullable
         @Override
         public View onCreateView(@NonNull LayoutInflater inflater,
@@ -44,4 +47,16 @@
 
             return view;
         }
+
+
+        @Override
+        public void onDestroyView() {
+            super.onDestroyView();
+
+            // stop Firebase listeners to avoid crashes
+            TempSensor.removeListener();
+            HumidSensor.removeListener();
+
+        }
+
     }

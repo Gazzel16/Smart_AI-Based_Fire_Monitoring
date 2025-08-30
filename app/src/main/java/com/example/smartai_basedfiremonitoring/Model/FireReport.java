@@ -7,6 +7,9 @@ public class FireReport {
     private String description;
     private String timeReported;
 
+    public FireReport() {
+    }
+
     public FireReport(String reporterName, boolean confirmation, String description, String timeReported) {
         this.reporterName = reporterName;
         this.confirmation = confirmation;

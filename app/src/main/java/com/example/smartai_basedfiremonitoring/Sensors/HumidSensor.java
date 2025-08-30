@@ -12,7 +12,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class HumidSensor {
-
+    private static DatabaseReference databaseReference;
+    private static ValueEventListener humidListener;
     public static void humidMonitoring(TextView humidAnalogOutput, TextView humidStatus, Fragment fragment){
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("sensors");
@@ -46,5 +47,10 @@ public class HumidSensor {
             }
         });
     }
-
+    public static void removeListener() {
+        if (databaseReference != null && humidListener != null) {
+            databaseReference.removeEventListener(humidListener);
+            humidListener = null;
+        }
+    }
 }

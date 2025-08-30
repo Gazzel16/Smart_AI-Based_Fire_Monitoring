@@ -24,6 +24,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class TempSensor {
+
+    private static DatabaseReference databaseReference;
+    private static ValueEventListener tempListener;
     public static void tempMonitoring(TextView tempAnalogOutput, TextView tempStatus, Fragment fragment){
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("sensors");
@@ -77,6 +80,13 @@ public class TempSensor {
             }
         });
 
+    }
+
+    public static void removeListener() {
+        if (databaseReference != null && tempListener != null) {
+            databaseReference.removeEventListener(tempListener);
+            tempListener = null;
+        }
     }
 
     private static void showNotification(Context context, String title, String message) {
