@@ -27,7 +27,7 @@ public class TempSensor {
 
     private static DatabaseReference databaseReference;
     private static ValueEventListener tempListener;
-    public static void tempMonitoring(TextView tempAnalogOutput, TextView tempStatus, Fragment fragment){
+    public static void tempMonitoring(TextView timeFireDetected, TextView tempStatus, Fragment fragment){
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("sensors");
 
@@ -38,7 +38,7 @@ public class TempSensor {
                 Double temp = snapshot.child("temperature").getValue(Double.class);
 
                 if (temp != null){
-                    tempAnalogOutput.setText(String.valueOf(temp) + " °C");
+                    timeFireDetected.setText(String.valueOf(temp) + " °C");
                 }
 
                 if (temp != null && temp > 40) {

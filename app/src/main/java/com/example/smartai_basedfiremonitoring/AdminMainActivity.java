@@ -6,7 +6,9 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.example.smartai_basedfiremonitoring.Fragments.AdminFragments.AdminDashboardFragment;
 import com.example.smartai_basedfiremonitoring.Fragments.AdminFragments.AdminSettingsFragment;
+import com.example.smartai_basedfiremonitoring.Fragments.AdminFragments.ESP32_WIFI_CredentialsFragment;
 
 public class AdminMainActivity extends AppCompatActivity {
 
@@ -17,7 +19,7 @@ public class AdminMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin_main);
 
         if (savedInstanceState == null){
-            loadFragment(new AdminSettingsFragment());
+            loadFragment(new AdminDashboardFragment());
         }
 
     }

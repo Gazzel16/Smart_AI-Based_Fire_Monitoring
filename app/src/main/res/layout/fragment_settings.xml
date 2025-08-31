@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="4dp"
+        android:padding="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -73,7 +73,7 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_gravity="center"
-                android:src="@drawable/warning_icon"
+                android:src="@drawable/alert"
                 android:tint="#1676A4" />
 
             <TextView
@@ -98,6 +98,7 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_gravity="center"
+                android:tint="#1676A4"
                 android:src="@drawable/logout" />
 
             <TextView
@@ -106,6 +107,7 @@
                 android:layout_margin="8dp"
                 android:fontFamily="sans-serif-condensed-medium"
                 android:text="Logout"
+
                 android:textSize="18sp" />
 
         </LinearLayout>

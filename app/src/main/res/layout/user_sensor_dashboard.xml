@@ -67,7 +67,7 @@
       android:layout_width="0dp"
       android:layout_height="0dp"
       android:padding="7dp"
-      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
@@ -135,13 +135,13 @@
                   app:layout_constraintTop_toTopOf="parent" />
 
               <TextView
-                  android:id="@+id/flameOutput"
+                  android:id="@+id/timeFireDetected"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:layout_marginTop="12dp"
                   android:fontFamily="@font/fir_sans_italic"
-                  android:textColor="#FA7F57"
-                  android:text="AO: 1000" />
+                  android:text="12/12/2025 15:30:10"
+                  android:textColor="#FA7F57" />
 
               <TextView
                   android:id="@+id/flameDetector"
@@ -461,5 +461,17 @@
     </LinearLayout>
   </ScrollView>
 
-
+  <com.google.android.material.bottomnavigation.BottomNavigationView
+      android:id="@+id/bottom_navigation"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      app:itemIconTint="#6A77FF"
+      app:itemTextColor="#6A77FF"
+      app:labelVisibilityMode="unlabeled"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintVertical_bias="1.0"
+      app:menu="@menu/bottom_nav_menu" />
 </androidx.constraintlayout.widget.ConstraintLayout>

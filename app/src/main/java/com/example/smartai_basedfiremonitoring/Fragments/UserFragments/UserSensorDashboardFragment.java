@@ -18,7 +18,7 @@
 
     public class UserSensorDashboardFragment extends Fragment {
 
-        TextView flameOutput, flameDetector,tempAnalogOutput,
+        TextView timeFireDetected, flameDetector,tempAnalogOutput,
                 tempStatus, humidAnalogOutput, humidStatus, smokeOutput, smokeStatus;
 
         private static ValueEventListener tempListener;
@@ -29,7 +29,7 @@
                                  @Nullable Bundle savedInstanceState) {
             View view =  inflater.inflate(R.layout.user_sensor_dashboard, container, false);
 
-            flameOutput = view.findViewById(R.id.flameOutput);
+            timeFireDetected = view.findViewById(R.id.timeFireDetected);
             flameDetector = view.findViewById(R.id.flameDetector);
 
             tempAnalogOutput = view.findViewById(R.id.tempAnalogOutput);
@@ -41,7 +41,7 @@
             smokeOutput = view.findViewById(R.id.smokeOutput);
             smokeStatus = view.findViewById(R.id.smokeStatus);
 
-            FlameSensor.flameMonitoring(flameOutput, flameDetector, this);
+            FlameSensor.flameMonitoring(timeFireDetected, flameDetector, this);
             TempSensor.tempMonitoring(tempAnalogOutput, tempStatus, this);
             HumidSensor.humidMonitoring(humidAnalogOutput, humidStatus, this);
 

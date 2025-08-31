@@ -63,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class); // Replace with your main activity
+                        Intent intent = new Intent(LoginActivity.this, AdminMainActivity.class); // Replace with your main activity
                         startActivity(intent);
                         finish();
                     } else {

@@ -3,6 +3,7 @@ package com.example.smartai_basedfiremonitoring.Fragments.UserFragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -81,6 +82,7 @@ public class EmergencyReportFragment extends Fragment {
                                 .addOnSuccessListener(aVoid -> {
                                     Toast.makeText(getContext(), "Reported submitted", Toast.LENGTH_SHORT).show();
                                     inputReport.setText("");
+
                                 }).addOnFailureListener(e -> {
                                     Toast.makeText(getContext(), "Failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                                 });
