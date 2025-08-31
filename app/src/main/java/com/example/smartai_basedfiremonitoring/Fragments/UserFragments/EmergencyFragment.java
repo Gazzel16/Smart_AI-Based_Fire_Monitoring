@@ -1,5 +1,6 @@
 package com.example.smartai_basedfiremonitoring.Fragments.UserFragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.example.smartai_basedfiremonitoring.Activity.EmergencyReportActivity;
 import com.example.smartai_basedfiremonitoring.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -29,12 +31,8 @@ public class EmergencyFragment extends Fragment {
         LottieAnimationView lottie = view.findViewById(R.id.lottieAnimationView);
 
         lottie.setOnClickListener(v -> {
-            Fragment emergencyReportFragment = new EmergencyReportFragment();
-                    requireActivity().getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.fragment_container, emergencyReportFragment)
-                            .addToBackStack(null)
-                            .commit();
+       Intent intent = new Intent(getContext(), EmergencyReportActivity.class);
+       startActivity(intent);
         });
 
 

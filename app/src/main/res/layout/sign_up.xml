@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFF3E0"
-    tools:context="com.example.smartai_basedfiremonitoring.SignUpActivity">
+    tools:context="com.example.smartai_basedfiremonitoring.Activity.SignUpActivity">
 
     <ScrollView
         android:layout_width="match_parent"

@@ -56,6 +56,7 @@
             // stop Firebase listeners to avoid crashes
             TempSensor.removeListener();
             HumidSensor.removeListener();
+            FlameSensor.removeListener();
 
         }
 

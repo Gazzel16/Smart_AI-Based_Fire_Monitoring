@@ -21,43 +21,64 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.example.smartai_basedfiremonitoring.Utils.SoundManager;
 
-public class FlameSensor {
-    public static void flameMonitoring(TextView flameOutput, TextView flameDetector, Fragment fragment){
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
+public class FlameSensor {
+    private static ValueEventListener flameListener;
+    public static void flameMonitoring(TextView timeFireDetected, TextView flameDetector, Fragment fragment) {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("sensors");
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        flameListener = new ValueEventListener() {
             private MediaPlayer mediaPlayer;
+
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Boolean flameSensor = snapshot.child("flame").getValue(Boolean.class);
 
-                if (flameSensor != null && flameSensor){
+                // Make sure fragment is still active before updating UI
+                if (!fragment.isAdded()) return;
 
-                    Context context = fragment.getContext();
-                    if (context != null) {
-                        SoundManager.getInstance(context).playSound(R.raw.fire_detected_voiceline);
+                // Run on UI thread to ensure proper updates
+                fragment.requireActivity().runOnUiThread(() -> {
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+                    sdf.setTimeZone(TimeZone.getTimeZone("Asia/Manila"));
+                    String currentDateTime = sdf.format(new Date());
+
+                    if (flameSensor != null && flameSensor) {
+                        flameDetector.setText("🔥 Flame Detected!");
+                        timeFireDetected.setText("Time: " + currentDateTime);
+
+                        Context context = fragment.getContext();
+                        if (context != null) {
+                            SoundManager.getInstance(context).playSound(R.raw.fire_detected_voiceline);
+                            showNotification(context,
+                                    "⚠️ Fire Detected",
+                                    "A fire has been reported in Barangay Ilaya Alabang. Residents in the affected and nearby areas are advised to evacuate immediately to the nearest safe evacuation center. Please bring only essential belongings, assist children, elderly, and persons with disabilities, and follow instructions from local authorities and emergency responders.\n⚠️ Stay away from the fire-affected zone for your safety.");
+                        }
+                    } else {
+                        flameDetector.setText("No Flame Detected!");
+                        timeFireDetected.setText("Time: " + currentDateTime);
+
+                        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+                            mediaPlayer.stop();
+                            mediaPlayer.release();
+                            mediaPlayer = null;
+                        }
                     }
-
-                    showNotification(fragment.getContext(),
-                            "⚠️ Fire Detected",
-                            "A fire has been reported in Barangay Ilaya Alabang. Residents in the affected and nearby areas are advised to evacuate immediately to the nearest safe evacuation center. Please bring only essential belongings, assist children, elderly, and persons with disabilities, and follow instructions from local authorities and emergency responders.\n" +
-                                    "⚠\uFE0F Stay away from the fire-affected zone for your safety. ");
-
-                }else {
-                    if (mediaPlayer != null && mediaPlayer.isPlaying()) {
-                        mediaPlayer.stop();
-                        mediaPlayer.release();
-                        mediaPlayer = null;
-                    }
-                }
+                });
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Log.e("FlameSensor", "Database error: " + error.getMessage());
             }
-        });
+        };
+
+        // ✅ Add the listener to Firebase
+        databaseReference.addValueEventListener(flameListener);
     }
 
     private static void showNotification(Context context, String title, String message) {
@@ -95,5 +116,13 @@ public class FlameSensor {
         // Show it
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
         notificationManager.notify((int) System.currentTimeMillis(), builder.build());
+    }
+
+    public static void removeListener() {
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("sensors");
+        if (flameListener != null) {
+            databaseReference.removeEventListener(flameListener);
+            flameListener = null;
+        }
     }
 }

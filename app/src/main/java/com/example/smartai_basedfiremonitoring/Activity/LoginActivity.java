@@ -1,4 +1,4 @@
-package com.example.smartai_basedfiremonitoring;
+package com.example.smartai_basedfiremonitoring.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.smartai_basedfiremonitoring.R;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
@@ -45,6 +46,10 @@ public class LoginActivity extends AppCompatActivity {
         String email = emailEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
 
+        if(email.equals("admin@gmail.com") && password.equals("123456")){
+            Intent intent = new Intent(LoginActivity.this, AdminMainActivity.class); // Replace with your main activity
+            startActivity(intent);
+        }
         // ✅ Input validation
         if (email.isEmpty()) {
             emailEditText.setError("Please enter your email");
@@ -63,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(LoginActivity.this, AdminMainActivity.class); // Replace with your main activity
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class); // Replace with your main activity
                         startActivity(intent);
                         finish();
                     } else {

@@ -1,5 +1,6 @@
 package com.example.smartai_basedfiremonitoring.Fragments.UserFragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.example.smartai_basedfiremonitoring.Activity.LoginActivity;
 import com.example.smartai_basedfiremonitoring.R;
 
 public class SettingsFragment extends Fragment {
@@ -22,6 +24,13 @@ public class SettingsFragment extends Fragment {
 
         LinearLayout profile = view.findViewById(R.id.profile);
         LinearLayout emergency = view.findViewById(R.id.emergency);
+        LinearLayout logout = view.findViewById(R.id.logout);
+
+
+        logout.setOnClickListener(v -> {
+          Intent intent = new Intent(getContext(), LoginActivity.class);
+          startActivity(intent);
+        });
 
         profile.setOnClickListener(v -> {
             Fragment profileFragment = new ProfileFragment();

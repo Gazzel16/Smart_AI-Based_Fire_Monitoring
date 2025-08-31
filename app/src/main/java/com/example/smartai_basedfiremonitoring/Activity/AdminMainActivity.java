@@ -1,4 +1,4 @@
-package com.example.smartai_basedfiremonitoring;
+package com.example.smartai_basedfiremonitoring.Activity;
 
 import android.os.Bundle;
 
@@ -7,8 +7,8 @@ import androidx.fragment.app.Fragment;
 
 import com.example.smartai_basedfiremonitoring.Fragments.AdminFragments.AdminDashboardFragment;
 import com.example.smartai_basedfiremonitoring.Fragments.AdminFragments.AdminFireIncidentReport;
-import com.example.smartai_basedfiremonitoring.Fragments.AdminFragments.AdminSettingsFragment;
 import com.example.smartai_basedfiremonitoring.Fragments.AdminFragments.ESP32_WIFI_CredentialsFragment;
+import com.example.smartai_basedfiremonitoring.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class AdminMainActivity extends AppCompatActivity {

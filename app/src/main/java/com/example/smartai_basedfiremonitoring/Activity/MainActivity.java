@@ -1,4 +1,4 @@
-package com.example.smartai_basedfiremonitoring;
+package com.example.smartai_basedfiremonitoring.Activity;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,6 +17,7 @@ import com.example.smartai_basedfiremonitoring.Fragments.UserFragments.SettingsF
 import com.example.smartai_basedfiremonitoring.Fragments.UserFragments.UserSensorDashboardFragment;
 import com.example.smartai_basedfiremonitoring.Gemini.GeminiAdvisory;
 import com.example.smartai_basedfiremonitoring.Gemini.GeminiAdvisoryDialog;
+import com.example.smartai_basedfiremonitoring.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {

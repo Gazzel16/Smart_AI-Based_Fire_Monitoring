@@ -2,10 +2,7 @@ package com.example.smartai_basedfiremonitoring.Sensors;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.Build;
 import android.widget.TextView;
 
@@ -14,7 +11,6 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 
-import com.example.smartai_basedfiremonitoring.MainActivity;
 import com.example.smartai_basedfiremonitoring.R;
 import com.example.smartai_basedfiremonitoring.Utils.SoundManager;
 import com.google.firebase.database.DataSnapshot;
@@ -34,7 +30,7 @@ public class TempSensor {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
+                if (fragment == null || !fragment.isAdded()) return;
                 Double temp = snapshot.child("temperature").getValue(Double.class);
 
                 if (temp != null){
