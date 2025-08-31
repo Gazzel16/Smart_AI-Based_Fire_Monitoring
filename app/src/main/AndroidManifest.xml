@@ -18,6 +18,12 @@
         android:theme="@style/Theme.SmartAIBasedFireMonitoring"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Activity.Admin_ViewAdmin"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.Admin_ViewUsers"
+            android:exported="false" />
+        <activity
             android:name=".Activity.EmergencyReportActivity"
             android:exported="false" />
         <activity
