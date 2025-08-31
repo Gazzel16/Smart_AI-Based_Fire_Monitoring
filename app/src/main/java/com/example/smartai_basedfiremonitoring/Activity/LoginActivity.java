@@ -32,6 +32,12 @@ public class LoginActivity extends AppCompatActivity {
         signUp = findViewById(R.id.signUp);
 
         mAuth = FirebaseAuth.getInstance();
+        if (mAuth.getCurrentUser() != null) {
+            // User is already logged in, go directly to MainActivity
+            startActivity(new Intent(this, MainActivity.class));
+            finish(); // close login activity
+            return; // skip the rest of onCreate
+        }
 
         // Go to sign up page
         signUp.setOnClickListener(v -> {

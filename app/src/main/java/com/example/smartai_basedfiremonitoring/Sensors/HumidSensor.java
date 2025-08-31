@@ -21,7 +21,7 @@ public class HumidSensor {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
+                if (fragment == null || !fragment.isAdded()) return;
                 Double humid = snapshot.child("humidity").getValue(Double.class);
 
                 if (humid != null){

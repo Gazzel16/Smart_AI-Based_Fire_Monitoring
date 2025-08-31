@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 
 import com.example.smartai_basedfiremonitoring.Activity.LoginActivity;
 import com.example.smartai_basedfiremonitoring.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class SettingsFragment extends Fragment {
 
@@ -28,8 +29,9 @@ public class SettingsFragment extends Fragment {
 
 
         logout.setOnClickListener(v -> {
-          Intent intent = new Intent(getContext(), LoginActivity.class);
-          startActivity(intent);
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(getContext(), LoginActivity.class);
+            startActivity(intent);
         });
 
         profile.setOnClickListener(v -> {

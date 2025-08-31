@@ -48,7 +48,7 @@ public class FlameSensor {
                     String currentDateTime = sdf.format(new Date());
 
                     if (flameSensor != null && flameSensor) {
-                        flameDetector.setText("🔥 Flame Detected!");
+                        flameDetector.setText("Flame Detected!");
                         timeFireDetected.setText("Time: " + currentDateTime);
 
                         Context context = fragment.getContext();
