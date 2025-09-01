@@ -1,6 +1,7 @@
 package com.example.smartai_basedfiremonitoring.Adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smartai_basedfiremonitoring.Adapter.AdminFireIncidentReportHandler.AdminConfirmReport;
+import com.example.smartai_basedfiremonitoring.Adapter.AdminFireIncidentReportHandler.AdminDeclineFalseReport;
 import com.example.smartai_basedfiremonitoring.Model.FireReport;
 import com.example.smartai_basedfiremonitoring.R;
 import com.google.firebase.database.DatabaseReference;
@@ -46,16 +48,26 @@ public class AdminFireIncidentReportAdapter extends RecyclerView.Adapter<AdminFi
         if (report.isConfirmation()) {
             holder.confirmation.setText("Confirmed");
             holder.confirmation.setTextColor(context.getResources().getColor(android.R.color.holo_green_dark));
+        } else if(report.isFalseReport()) {
+            holder.confirmation.setText("False Report");
+            holder.confirmation.setTextColor(context.getResources().getColor(android.R.color.holo_red_dark));
         } else {
             holder.confirmation.setText("Not Confirmed");
-            holder.confirmation.setTextColor(context.getResources().getColor(android.R.color.holo_red_dark));
+            holder.confirmation.setTextColor(context.getResources().getColor(android.R.color.holo_blue_dark));
         }
 
         holder.confirmReport.setOnClickListener(v -> {
             AdminConfirmReport.confirm(report.getUserId(), report.getReportId());
+            holder.confirmReport.setTextColor(Color.GRAY);
+            holder.confirmReport.setEnabled(false);
         });
 
         holder.falseReport.setOnClickListener(v -> {
+
+            AdminDeclineFalseReport.falseReport(report.getUserId(), report.getReportId());
+            holder.falseReport.setTextColor(Color.GRAY);
+            holder.falseReport.setEnabled(false);
+            holder.falseReport.setText("False Report");
 
         });
     }

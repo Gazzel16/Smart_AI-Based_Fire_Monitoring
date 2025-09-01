@@ -11,6 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smartai_basedfiremonitoring.Model.FireReport;
 import com.example.smartai_basedfiremonitoring.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -54,10 +59,14 @@ public class FireReportAdapter extends RecyclerView.Adapter<FireReportAdapter.Re
         if (report.isConfirmation()) {
             holder.confirmation.setText("Confirmed");
             holder.confirmation.setTextColor(context.getResources().getColor(android.R.color.holo_green_dark));
-        } else {
-            holder.confirmation.setText("Not Confirm");
+        } else if(report.isFalseReport()) {
+            holder.confirmation.setText("False Report");
             holder.confirmation.setTextColor(context.getResources().getColor(android.R.color.holo_red_dark));
+        } else {
+            holder.confirmation.setText("Not Confirmed");
+            holder.confirmation.setTextColor(context.getResources().getColor(android.R.color.holo_blue_dark));
         }
+
     }
 
     @Override
