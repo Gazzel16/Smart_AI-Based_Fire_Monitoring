@@ -17,6 +17,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartAIBasedFireMonitoring"
         android:usesCleartextTraffic="true">
+
+        <service
+            android:name=".MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
         <activity
             android:name=".Activity.Admin_ViewAdmin"
             android:exported="false" />

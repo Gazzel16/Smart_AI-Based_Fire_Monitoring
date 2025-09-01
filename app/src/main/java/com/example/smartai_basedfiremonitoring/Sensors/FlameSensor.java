@@ -21,6 +21,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.example.smartai_basedfiremonitoring.Utils.SoundManager;
 
+import org.json.JSONObject;
+
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -57,6 +62,8 @@ public class FlameSensor {
                             showNotification(context,
                                     "⚠️ Fire Detected",
                                     "A fire has been reported in Barangay Ilaya Alabang. Residents in the affected and nearby areas are advised to evacuate immediately to the nearest safe evacuation center. Please bring only essential belongings, assist children, elderly, and persons with disabilities, and follow instructions from local authorities and emergency responders.\n⚠️ Stay away from the fire-affected zone for your safety.");
+
+                            sendAlertToBackend();
                         }
                     } else {
                         flameDetector.setText("No Flame Detected!");
@@ -118,6 +125,31 @@ public class FlameSensor {
         notificationManager.notify((int) System.currentTimeMillis(), builder.build());
     }
 
+    private static void sendAlertToBackend() {
+        new Thread(() -> {
+            try {
+                URL url = new URL("http://192.168.1.5:5000/send-alert"); // ⬅️ change this
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("POST");
+                conn.setRequestProperty("Content-Type", "application/json");
+                conn.setDoOutput(true);
+
+                JSONObject json = new JSONObject();
+                json.put("flameDetected", true);
+
+                try (OutputStream os = conn.getOutputStream()) {
+                    os.write(json.toString().getBytes());
+                    os.flush();
+                }
+
+                int responseCode = conn.getResponseCode();
+                Log.d("FlameSensor", "Backend response: " + responseCode);
+                conn.disconnect();
+            } catch (Exception e) {
+                Log.e("FlameSensor", "Error sending to backend", e);
+            }
+        }).start();
+    }
     public static void removeListener() {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("sensors");
         if (flameListener != null) {

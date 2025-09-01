@@ -2,6 +2,7 @@ package com.example.smartai_basedfiremonitoring.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -12,6 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.smartai_basedfiremonitoring.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -70,15 +74,38 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         // ✅ Sign in using FirebaseAuth
+        // ✅ Sign in using FirebaseAuth
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class); // Replace with your main activity
-                        startActivity(intent);
-                        finish();
+                        // Login success → now fetch FCM token
+                        FirebaseMessaging.getInstance().getToken()
+                                .addOnCompleteListener(tokenTask -> {
+                                    if (!tokenTask.isSuccessful()) {
+                                        Log.w("FCM", "Fetching FCM registration token failed", tokenTask.getException());
+                                        return;
+                                    }
+
+                                    // Get FCM registration token
+                                    String token = tokenTask.getResult();
+                                    Log.d("FCM", "User FCM Token: " + token);
+
+                                    // ✅ Save token in Realtime Database
+                                    String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                    DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(userId);
+                                    userRef.child("fcmToken").setValue(token);
+
+                                    // Navigate to main screen
+                                    Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                });
                     } else {
-                        Toast.makeText(LoginActivity.this, "Login failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        // Login failed
+                        Toast.makeText(LoginActivity.this,
+                                "Login failed: " + task.getException().getMessage(),
+                                Toast.LENGTH_SHORT).show();
                     }
                 });
     }

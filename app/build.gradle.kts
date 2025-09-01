@@ -61,6 +61,7 @@ dependencies {
 
     implementation("de.hdodenhof:circleimageview:3.1.0")
     implementation("com.squareup.okhttp3:okhttp:4.11.0")
+    implementation("com.google.firebase:firebase-messaging:23.1.2")
 
 
 }
