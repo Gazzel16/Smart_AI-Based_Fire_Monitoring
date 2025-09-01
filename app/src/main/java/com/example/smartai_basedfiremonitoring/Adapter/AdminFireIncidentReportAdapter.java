@@ -10,8 +10,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.smartai_basedfiremonitoring.Adapter.AdminFireIncidentReportHandler.AdminConfirmReport;
 import com.example.smartai_basedfiremonitoring.Model.FireReport;
 import com.example.smartai_basedfiremonitoring.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
@@ -49,7 +52,7 @@ public class AdminFireIncidentReportAdapter extends RecyclerView.Adapter<AdminFi
         }
 
         holder.confirmReport.setOnClickListener(v -> {
-
+            AdminConfirmReport.confirm(report.getUserId(), report.getReportId());
         });
 
         holder.falseReport.setOnClickListener(v -> {

@@ -7,9 +7,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.smartai_basedfiremonitoring.Adapter.FireReportAdapter;
 import com.example.smartai_basedfiremonitoring.Model.FireReport;
@@ -30,13 +32,54 @@ public class FireUpdateFragment extends Fragment {
     private DatabaseReference dbRef;
     private ValueEventListener valueEventListener;
 
+    private TextView fireDetected, description;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_fire_update, container, false);
 
-        dbRef = FirebaseDatabase.getInstance().getReference("users");
 
+        FireUpdateResidenceReport(view);
+        FireUpdateHotline(view);
+
+        return  view;
+    }
+
+    public void FireUpdateHotline(View view){
+
+        fireDetected = view.findViewById(R.id.fireDetected);
+        description = view.findViewById(R.id.description);
+
+        dbRef = FirebaseDatabase.getInstance().getReference("sensors");
+
+        dbRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Boolean flameSensor = snapshot.child("flame").getValue(Boolean.class);
+
+                if (flameSensor != null && flameSensor){
+                    description.setText("Fire Alert Detected");
+                    fireDetected.setText("Fire detected in barangay ilaya alabang, \\nplease evacuate in the nearest evacuation center");
+                }else {
+                    description.setText("No details until further notice");
+                    fireDetected.setText("No Fire Detected");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+                Log.d("FlameSensor", "Database error" + error.getMessage());
+            }
+        });
+
+
+
+    }
+    public void FireUpdateResidenceReport(View view){
+
+        dbRef = FirebaseDatabase.getInstance().getReference("users");
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
 
@@ -71,9 +114,7 @@ public class FireUpdateFragment extends Fragment {
             }
         };
 
-
         dbRef.addValueEventListener(valueEventListener);
-        return  view;
     }
     @Override
     public void onDestroyView() {

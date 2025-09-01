@@ -53,6 +53,7 @@
                 }
             }
 
+            
             NotificationCompat.Builder builder = new NotificationCompat.Builder(this, channelId)
                     .setSmallIcon(R.drawable.flame_logo)
                     .setContentTitle(title)

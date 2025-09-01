@@ -64,7 +64,10 @@ public class EmergencyReportActivity extends AppCompatActivity {
                     if (user != null) {
                         String reporterName = user.getUsername();
                         FireReport fireReport = new FireReport(
+                                reportedId,
+                                userId,
                                 reporterName,
+                                false,
                                 false,
                                 description,
                                 currentDateTime

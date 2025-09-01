@@ -136,7 +136,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:layout_weight="1"
-                android:text="Confirm Report"
+                android:text="Confirm"
                 android:backgroundTint="#3F51B5"
                 />
             <Button
@@ -145,7 +145,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_margin="8dp"
-                android:text="False Report"
+                android:text="False"
                 android:backgroundTint="#E91E63"
                 />
         </LinearLayout>
