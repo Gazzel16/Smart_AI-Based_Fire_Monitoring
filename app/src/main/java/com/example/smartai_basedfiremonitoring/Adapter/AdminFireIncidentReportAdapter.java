@@ -45,31 +45,62 @@ public class AdminFireIncidentReportAdapter extends RecyclerView.Adapter<AdminFi
         holder.description.setText(report.getDescription());
         holder.timeReported.setText(report.getTimeReported());
 
-        if (report.isConfirmation()) {
-            holder.confirmation.setText("Confirmed");
-            holder.confirmation.setTextColor(context.getResources().getColor(android.R.color.holo_green_dark));
-        } else if(report.isFalseReport()) {
-            holder.confirmation.setText("False Report");
-            holder.confirmation.setTextColor(context.getResources().getColor(android.R.color.holo_red_dark));
-        } else {
-            holder.confirmation.setText("Not Confirmed");
-            holder.confirmation.setTextColor(context.getResources().getColor(android.R.color.holo_blue_dark));
-        }
-
         holder.confirmReport.setOnClickListener(v -> {
             AdminConfirmReport.confirm(report.getUserId(), report.getReportId());
             holder.confirmReport.setTextColor(Color.GRAY);
             holder.confirmReport.setEnabled(false);
+            report.setConfirmation(true);
+            notifyItemChanged(position);
         });
 
         holder.falseReport.setOnClickListener(v -> {
-
             AdminDeclineFalseReport.falseReport(report.getUserId(), report.getReportId());
             holder.falseReport.setTextColor(Color.GRAY);
             holder.falseReport.setEnabled(false);
+            report.setFalseReport(true);
+            holder.falseReport.setText("False Report");
+            notifyItemChanged(position);
+        });
+
+        reportConfirmation(holder, report);
+    }
+
+    public void reportConfirmation(FireReportViewHolder holder, FireReport report) {
+        if (report.isConfirmation()) {
+            holder.confirmation.setText("Confirmed");
+            holder.confirmation.setTextColor(context.getResources().getColor(android.R.color.holo_green_dark));
+
+            // disable confirm + false buttons
+            holder.confirmReport.setEnabled(false);
+            holder.confirmReport.setTextColor(Color.GRAY);
+
+            holder.falseReport.setEnabled(false);
+            holder.falseReport.setTextColor(Color.GRAY);
+
+        } else if (report.isFalseReport()) {
+            holder.confirmation.setText("False Report");
+            holder.confirmation.setTextColor(context.getResources().getColor(android.R.color.holo_red_dark));
+
+            // disable confirm + false buttons
+            holder.confirmReport.setEnabled(false);
+            holder.confirmReport.setTextColor(Color.GRAY);
+
+            holder.falseReport.setEnabled(false);
+            holder.falseReport.setTextColor(Color.GRAY);
             holder.falseReport.setText("False Report");
 
-        });
+        } else {
+            holder.confirmation.setText("Not Confirmed");
+            holder.confirmation.setTextColor(context.getResources().getColor(android.R.color.holo_blue_dark));
+
+            // reset buttons to active state
+            holder.confirmReport.setEnabled(true);
+            holder.confirmReport.setTextColor(Color.WHITE);
+
+            holder.falseReport.setEnabled(true);
+            holder.falseReport.setTextColor(Color.WHITE);
+            holder.falseReport.setText("Decline"); // or original text
+        }
     }
 
     @Override

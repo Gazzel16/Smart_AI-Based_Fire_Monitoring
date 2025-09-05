@@ -29,6 +29,10 @@ public class ProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
+        View bottom_navigation = requireActivity().findViewById(R.id.bottom_navigation);
+        if (bottom_navigation != null){
+            bottom_navigation.setVisibility(View.GONE);
+        }
         Profile(view);
         return view;
     }
@@ -103,4 +107,12 @@ public class ProfileFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        View bottom_navigation = requireActivity().findViewById(R.id.bottom_navigation);
+        if (bottom_navigation != null){
+            bottom_navigation.setVisibility(View.VISIBLE);
+        }
+    }
 }

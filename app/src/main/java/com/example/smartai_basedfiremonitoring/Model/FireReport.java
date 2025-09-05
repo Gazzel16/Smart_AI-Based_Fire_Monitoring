@@ -45,8 +45,16 @@ public void setReportId(String reportId){
         return confirmation;
     }
 
+    public void setConfirmation(Boolean confirmation){
+        this.confirmation = confirmation;
+    }
+
     public boolean isFalseReport(){
         return falseReport;
+    }
+
+    public void setFalseReport(Boolean falseReport){
+        this.falseReport = falseReport;
     }
 
     public String getDescription() {

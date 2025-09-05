@@ -1,5 +1,6 @@
     package com.example.smartai_basedfiremonitoring.Fragments.UserFragments;
 
+    import android.graphics.Color;
     import android.os.Bundle;
     import android.view.LayoutInflater;
     import android.view.View;
@@ -16,17 +17,26 @@
     import com.example.smartai_basedfiremonitoring.Sensors.FlameSensor;
     import com.example.smartai_basedfiremonitoring.Sensors.HumidSensor;
     import com.example.smartai_basedfiremonitoring.Sensors.TempSensor;
+    import com.github.mikephil.charting.charts.LineChart;
+    import com.github.mikephil.charting.components.XAxis;
+    import com.github.mikephil.charting.components.YAxis;
+    import com.github.mikephil.charting.data.Entry;
+    import com.github.mikephil.charting.data.LineData;
+    import com.github.mikephil.charting.data.LineDataSet;
     import com.google.firebase.auth.FirebaseAuth;
     import com.google.firebase.auth.FirebaseUser;
     import com.google.firebase.database.DatabaseReference;
     import com.google.firebase.database.FirebaseDatabase;
     import com.google.firebase.database.ValueEventListener;
 
+    import java.util.ArrayList;
+
     public class UserSensorDashboardFragment extends Fragment {
 
         TextView timeFireDetected, flameDetector,tempAnalogOutput,
                 tempStatus, humidAnalogOutput, humidStatus, smokeOutput, smokeStatus, username;
 
+        LineChart tempLineChart;
         private static ValueEventListener tempListener;
         @Nullable
         @Override
@@ -47,13 +57,18 @@
             smokeOutput = view.findViewById(R.id.smokeOutput);
             smokeStatus = view.findViewById(R.id.smokeStatus);
 
+            tempLineChart = view.findViewById(R.id.tempLineChart);
+
             FlameSensor.flameMonitoring(timeFireDetected, flameDetector, this);
-            TempSensor.tempMonitoring(tempAnalogOutput, tempStatus, this);
+            TempSensor.tempMonitoring(tempAnalogOutput, tempStatus, tempLineChart, this);
             HumidSensor.humidMonitoring(humidAnalogOutput, humidStatus, this);
 
-            UserNameHandler(view);
+//            UserNameHandler(view);
             return view;
         }
+
+
+
 
 
         @Override
@@ -67,27 +82,27 @@
 
         }
 
-        public void UserNameHandler(View view){
-
-            username = view.findViewById(R.id.username);
-            FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users");
-
-            if (currentUser != null){
-                String userId = currentUser.getUid();
-                databaseReference.child(userId).get().addOnSuccessListener(snapShot -> {
-                    User user = snapShot.getValue(User.class);
-
-                    if (user != null){
-                        username.setText("Welcome! " + user.getUsername());
-                    }
-
-                }).addOnFailureListener(e -> {
-                    Toast.makeText(getContext(), "Failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                });
-
-            }
-
-        }
+//        public void UserNameHandler(View view){
+//
+//            username = view.findViewById(R.id.username);
+//            FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+//            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users");
+//
+//            if (currentUser != null){
+//                String userId = currentUser.getUid();
+//                databaseReference.child(userId).get().addOnSuccessListener(snapShot -> {
+//                    User user = snapShot.getValue(User.class);
+//
+//                    if (user != null){
+//                        username.setText("Welcome! " + user.getUsername());
+//                    }
+//
+//                }).addOnFailureListener(e -> {
+//                    Toast.makeText(getContext(), "Failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+//                });
+//
+//            }
+//
+//        }
 
     }

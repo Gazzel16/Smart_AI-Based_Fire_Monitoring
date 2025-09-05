@@ -1,0 +1,8 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+
+    <!-- Border color and width -->
+    <stroke
+        android:width="2dp"
+        android:color="#B3B0B0"/>  <!-- Red border -->
+</shape>

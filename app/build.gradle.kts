@@ -63,5 +63,7 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:4.11.0")
     implementation("com.google.firebase:firebase-messaging:23.1.2")
 
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+
 
 }

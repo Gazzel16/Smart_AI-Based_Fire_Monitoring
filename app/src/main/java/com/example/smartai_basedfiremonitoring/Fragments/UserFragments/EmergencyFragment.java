@@ -23,11 +23,6 @@ public class EmergencyFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_emergency, container, false);
 
-        BottomNavigationView bottomNav = requireActivity().findViewById(R.id.bottom_navigation);
-        if (bottomNav != null) {
-            bottomNav.setVisibility(View.GONE);
-        }
-
         LottieAnimationView lottie = view.findViewById(R.id.lottieAnimationView);
 
         lottie.setOnClickListener(v -> {
@@ -36,6 +31,10 @@ public class EmergencyFragment extends Fragment {
         });
 
 
+        BottomNavigationView bottomNav = requireActivity().findViewById(R.id.bottom_navigation);
+        if (bottomNav != null) {
+            bottomNav.setVisibility(View.GONE);
+        }
         return  view;
     }
 

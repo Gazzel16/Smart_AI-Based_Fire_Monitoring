@@ -34,16 +34,61 @@ public class FireUpdateFragment extends Fragment {
 
     private TextView fireDetected, description;
 
+    private boolean hasConfirmed = false;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_fire_update, container, false);
 
 
+        FireReportConfirmed(view);
         FireUpdateResidenceReport(view);
         FireUpdateHotline(view);
 
         return  view;
+    }
+
+    public void FireReportConfirmed(View view){
+
+    DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("users");
+
+    dbRef.addValueEventListener(new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot snapshot) {
+            hasConfirmed = false;
+
+            for (DataSnapshot userSnapShot : snapshot.getChildren()){
+                DataSnapshot reportsSnapshot = userSnapShot.child("reports");
+
+                for (DataSnapshot reportSnapshot: reportsSnapshot.getChildren()){
+                    Boolean confirmation = reportSnapshot.child("confirmation").getValue(Boolean.class);
+
+                    if (confirmation != null && confirmation){
+                        hasConfirmed = true;
+                        break;
+                    }
+                }
+                if (hasConfirmed) break;
+            }
+
+            if (hasConfirmed){
+                description.setText("Fire Alert Detected");
+                fireDetected.setText("Fire detected in barangay ilaya alabang, \\nplease evacuate in the nearest evacuation center");
+            } else {
+                description.setText("No details until further notice");
+                fireDetected.setText("No Fire Detected");
+            }
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError error) {
+
+        }
+    });
+
+
+
     }
 
     public void FireUpdateHotline(View view){
@@ -58,13 +103,15 @@ public class FireUpdateFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Boolean flameSensor = snapshot.child("flame").getValue(Boolean.class);
 
+            if (!hasConfirmed){
                 if (flameSensor != null && flameSensor){
                     description.setText("Fire Alert Detected");
-                    fireDetected.setText("Fire detected in barangay ilaya alabang, \\nplease evacuate in the nearest evacuation center");
+                    fireDetected.setText("Fire detected in barangay ilaya alabang, \n\nplease evacuate in the nearest evacuation center");
                 }else {
                     description.setText("No details until further notice");
                     fireDetected.setText("No Fire Detected");
                 }
+            }
             }
 
             @Override
