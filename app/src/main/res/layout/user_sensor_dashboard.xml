@@ -61,6 +61,7 @@
             android:id="@+id/cardView2"
             android:layout_width="match_parent"
             android:layout_height="150dp"
+            android:layout_margin="8dp"
             android:backgroundTint="#FFF3E0"
             app:cardCornerRadius="12dp"
             app:cardElevation="4dp"
@@ -261,7 +262,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:backgroundTint="#0EB1FA"
+                android:backgroundTint="@color/white"
+                android:layout_margin="8dp"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="4dp">
 
@@ -276,7 +278,6 @@
                     android:layout_height="70dp"
                     android:layout_margin="12dp"
                     android:src="@drawable/humid_logo"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toEndOf="@+id/linearLayout3"
@@ -287,21 +288,19 @@
                     android:id="@+id/linearLayout3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
                     android:orientation="vertical"
                     android:padding="12dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                  <line
                   <TextView
                       android:id="@+id/textView7"
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:fontFamily="@font/fir_sans_italic"
                       android:text="Humidity"
-                      android:textColor="@color/white"
+                      android:textColor="#0EB1FA"
                       android:textSize="18sp"
                       android:textStyle="bold" />
 
@@ -311,12 +310,24 @@
                       android:layout_height="wrap_content"
                       android:fontFamily="@font/fir_sans_italic"
                       android:text="Monitoring"
-                      android:textColor="@color/white" />
+                      android:textColor="@android:color/darker_gray" />
 
                 </LinearLayout>
 
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/humidLineChart"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/outline_border_round"
+                    android:backgroundTint="#0EB1FA"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
                     android:orientation="vertical"
@@ -324,7 +335,8 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent">
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/humidLineChart">
 
                   <TextView
                       android:id="@+id/humidAnalogOutput"
@@ -333,7 +345,7 @@
                       android:layout_weight="1"
                       android:fontFamily="@font/fir_sans_italic"
                       android:text="ω 20% hum"
-                      android:textColor="@color/white" />
+                      android:textColor="@android:color/darker_gray" />
 
                   <TextView
                       android:id="@+id/humidStatus"
@@ -341,10 +353,9 @@
                       android:layout_height="wrap_content"
                       android:layout_marginTop="4dp"
                       android:layout_weight="1"
-                      android:background="@drawable/outline_border_round"
                       android:fontFamily="@font/fir_sans_italic"
                       android:text="Normal"
-                      android:textColor="#0EB1FA"
+                      android:textColor="#4CAF50"
                       android:textStyle="bold" />
 
                 </LinearLayout>
@@ -361,6 +372,7 @@
             android:id="@+id/cardView3"
             android:layout_width="match_parent"
             android:layout_height="150dp"
+            android:layout_margin="8dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:backgroundTint="#DEB969"

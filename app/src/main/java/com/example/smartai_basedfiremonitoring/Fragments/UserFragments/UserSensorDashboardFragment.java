@@ -36,7 +36,7 @@
         TextView timeFireDetected, flameDetector,tempAnalogOutput,
                 tempStatus, humidAnalogOutput, humidStatus, smokeOutput, smokeStatus, username;
 
-        LineChart tempLineChart;
+        LineChart tempLineChart, humidLineChart;
         private static ValueEventListener tempListener;
         @Nullable
         @Override
@@ -58,10 +58,11 @@
             smokeStatus = view.findViewById(R.id.smokeStatus);
 
             tempLineChart = view.findViewById(R.id.tempLineChart);
+            humidLineChart = view.findViewById(R.id.humidLineChart);
 
             FlameSensor.flameMonitoring(timeFireDetected, flameDetector, this);
             TempSensor.tempMonitoring(tempAnalogOutput, tempStatus, tempLineChart, this);
-            HumidSensor.humidMonitoring(humidAnalogOutput, humidStatus, this);
+            HumidSensor.humidMonitoring(humidAnalogOutput, humidStatus, humidLineChart, this);
 
 //            UserNameHandler(view);
             return view;
