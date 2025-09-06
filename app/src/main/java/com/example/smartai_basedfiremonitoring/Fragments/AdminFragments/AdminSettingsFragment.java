@@ -54,11 +54,22 @@ private RecyclerView rvSetting;
                             .replace(R.id.fragment_container, adminSignup) // container in Activity
                             .addToBackStack(null) // allows going back
                             .commit();
+                    break;
+
+                case "Modify ESP32 Access":
+                    Fragment esp32Access = new ESP32_WIFI_CredentialsFragment();
+                    requireActivity().getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragment_container, esp32Access)
+                            .addToBackStack(null)
+                            .commit();
+                    break;
 
                 case "Logout":
                     FirebaseAuth.getInstance().signOut();
                     Intent intent = new Intent(getContext(), LoginActivity.class);
                     startActivity(intent);
+                    break;
             }
         });
 
