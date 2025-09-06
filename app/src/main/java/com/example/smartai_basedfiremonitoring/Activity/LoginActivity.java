@@ -36,12 +36,7 @@ public class LoginActivity extends AppCompatActivity {
         signUp = findViewById(R.id.signUp);
 
         mAuth = FirebaseAuth.getInstance();
-        if (mAuth.getCurrentUser() != null) {
-            // User is already logged in, go directly to MainActivity
-            startActivity(new Intent(this, MainActivity.class));
-            finish(); // close login activity
-            return; // skip the rest of onCreate
-        }
+
 
         // Go to sign up page
         signUp.setOnClickListener(v -> {
@@ -73,8 +68,7 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        // ✅ Sign in using FirebaseAuth
-        // ✅ Sign in using FirebaseAuth
+
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -95,11 +89,25 @@ public class LoginActivity extends AppCompatActivity {
                                     DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(userId);
                                     userRef.child("fcmToken").setValue(token);
 
-                                    // Navigate to main screen
-                                    Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                    startActivity(intent);
-                                    finish();
+
+                                    userRef.child("role").get().addOnSuccessListener(roleSnapshot ->{
+                                        String role = roleSnapshot.getValue(String.class);
+
+                                        if (role != null){
+                                            role = role.trim().toLowerCase();
+
+                                            if (role.equals("admin")){
+                                                Intent intent = new Intent(this, AdminMainActivity.class);
+                                                startActivity(intent);
+                                            } else if (role.equals("user")) {
+                                                Intent intent = new Intent(this, MainActivity.class);
+                                                startActivity(intent);
+                                            }else {
+                                                Toast.makeText(LoginActivity.this, "Unknown role", Toast.LENGTH_SHORT).show();
+                                            }
+
+                                        }
+                                    });
                                 });
                     } else {
                         // Login failed

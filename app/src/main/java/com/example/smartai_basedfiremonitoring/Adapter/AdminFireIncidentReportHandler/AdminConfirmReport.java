@@ -16,10 +16,16 @@
                     .child("reports")
                     .child(reportId);
 
-            // Use updateChildren instead of setValue
+            DatabaseReference dbFireDetected = FirebaseDatabase.getInstance().getReference("sensors");
+
+            Map<String, Object> fireUpdate = new HashMap<>();
+            fireUpdate.put("flame", true);
+
+            // Use updateChildren instead of setValue0
             Map<String, Object> updates = new HashMap<>();
             updates.put("confirmation", true);
 
+            dbFireDetected.updateChildren(fireUpdate);
             dbRef.updateChildren(updates);
         }
 

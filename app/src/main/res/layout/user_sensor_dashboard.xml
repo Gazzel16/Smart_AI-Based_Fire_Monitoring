@@ -183,6 +183,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:layout_marginTop="8dp"
+                    android:padding="8dp"
                     android:background="@drawable/outline_border_round"
                     android:backgroundTint="#F49507"
                     android:layout_margin="8dp"
@@ -237,7 +238,6 @@
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:layout_weight="1"
-                      android:layout_margin="8dp"
                       android:fontFamily="@font/fir_sans_italic"
                       android:text="Analog Output: \n20°F degrees"
                       android:textColor="@android:color/darker_gray" />
@@ -246,7 +246,6 @@
                       android:id="@+id/tempStatus"
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
-                      android:layout_margin="8dp"
                       android:layout_weight="1"
                       android:fontFamily="@font/fir_sans_italic"
                       android:text="Temperature Condition: \nNormal"

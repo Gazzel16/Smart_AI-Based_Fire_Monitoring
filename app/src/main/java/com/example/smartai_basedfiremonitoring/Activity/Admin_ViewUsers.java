@@ -31,17 +31,10 @@ public class Admin_ViewUsers extends AppCompatActivity {
 
         // Dummy data (later you can fetch from Firebase/DB/API)
         userList = new ArrayList<>();
-        userList.add(new User("1001", "Andrew E", "andrew@gmail.com"));
-        userList.add(new User("1002", "Andrew E", "andrew@gmail.com"));
-        userList.add(new User("1003", "Andrew E", "andrew@gmail.com"));
-
-        userList.add(new User("1001", "Andrew E", "andrew@gmail.com"));
-        userList.add(new User("1002", "Andrew E", "andrew@gmail.com"));
-        userList.add(new User("1003", "Andrew E", "andrew@gmail.com"));
-
-        userList.add(new User("1001", "Andrew E", "andrew@gmail.com"));
-        userList.add(new User("1002", "Andrew E", "andrew@gmail.com"));
-        userList.add(new User("1003", "Andrew E", "andrew@gmail.com"));
+        userList.add(new User("1001", "Andrew E", "andrew@gmail.com", "male", "user"));
+        userList.add(new User("1001", "Andrew E", "andrew@gmail.com", "male", "user"));
+        userList.add(new User("1001", "Andrew E", "andrew@gmail.com", "male", "user"));
+        userList.add(new User("1001", "Andrew E", "andrew@gmail.com", "male", "user"));
 
         adapter = new ViewUserAdapter(userList);
         recyclerView.setAdapter(adapter);

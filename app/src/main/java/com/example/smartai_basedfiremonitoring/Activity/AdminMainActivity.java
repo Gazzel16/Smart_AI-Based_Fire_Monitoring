@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.smartai_basedfiremonitoring.Fragments.AdminFragments.AdminDashboardFragment;
 import com.example.smartai_basedfiremonitoring.Fragments.AdminFragments.AdminFireIncidentReport;
+import com.example.smartai_basedfiremonitoring.Fragments.AdminFragments.AdminSettingsFragment;
 import com.example.smartai_basedfiremonitoring.Fragments.AdminFragments.ESP32_WIFI_CredentialsFragment;
 import com.example.smartai_basedfiremonitoring.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -38,7 +39,7 @@ public class AdminMainActivity extends AppCompatActivity {
             } else if (item.getItemId() == R.id.fireUpdate) {
                 selectedFragment = new AdminFireIncidentReport();
             } else if (item.getItemId() == R.id.nav_settings) {
-                selectedFragment = new ESP32_WIFI_CredentialsFragment();
+                selectedFragment = new AdminSettingsFragment();
             }
 
             if (selectedFragment != null) {

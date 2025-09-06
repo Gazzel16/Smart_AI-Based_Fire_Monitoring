@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 
@@ -27,6 +28,8 @@ public class SignUpActivity extends AppCompatActivity {
     DatabaseReference databaseReference;
     FirebaseAuth mAuth;
 
+    RadioButton female, male;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +40,9 @@ public class SignUpActivity extends AppCompatActivity {
         passwordEditText = findViewById(R.id.password);
 
         signUpBtn = findViewById(R.id.signUpBtn);
+
+        female = findViewById(R.id.female);
+        male = findViewById(R.id.male);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("users");
          mAuth = FirebaseAuth.getInstance();
@@ -49,6 +55,16 @@ public class SignUpActivity extends AppCompatActivity {
         String username = usernameEditText.getText().toString().trim();
         String email = emailEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
+        final String gender;
+
+        if (male.isChecked()){
+            gender = "male";
+        }else if (female.isChecked()){
+            gender = "female";
+        }else {
+            Toast.makeText(this, "Please select a gender", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
@@ -67,7 +83,7 @@ public class SignUpActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         // Save extra info in Realtime Database
                         String uid = mAuth.getCurrentUser().getUid();
-                        User user = new User(uid, username, email);
+                        User user = new User(uid, username, email, gender,"user");
 
                         databaseReference.child(uid).setValue(user)
                                 .addOnCompleteListener(dbTask -> {

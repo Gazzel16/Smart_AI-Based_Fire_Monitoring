@@ -4,11 +4,14 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.smartai_basedfiremonitoring.Model.User;
@@ -23,12 +26,13 @@ public class ProfileFragment extends Fragment {
 
     private EditText name, email, password;
     private Button saveBtn;
+    private RadioGroup genderGroup;
+    private RadioButton female, male;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-
         View bottom_navigation = requireActivity().findViewById(R.id.bottom_navigation);
         if (bottom_navigation != null){
             bottom_navigation.setVisibility(View.GONE);
@@ -42,6 +46,9 @@ public class ProfileFragment extends Fragment {
         email = view.findViewById(R.id.email);
         password = view.findViewById(R.id.password);
         saveBtn = view.findViewById(R.id.saveBtn);
+        female = view.findViewById(R.id.female);
+        male = view.findViewById(R.id.male);
+        genderGroup = view.findViewById(R.id.genderGroup);
 
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users");
@@ -54,6 +61,19 @@ public class ProfileFragment extends Fragment {
                 if (user != null){
                     name.setText(user.getUsername());
                     email.setText(user.getEmail());
+
+                    String gender = user.getGender();
+                    if (gender != null){
+                        gender = gender.trim().toLowerCase();
+                        Log.d("ProfileFragment", "Gender after trim/lowercase: " + gender);
+                        if (gender.equals("male")) {
+                            genderGroup.check(R.id.male);
+                        } else if (gender.equals("female")) {
+                            genderGroup.check(R.id.female);
+                        }
+                    }
+
+
                 }
 
             }).addOnFailureListener(e -> {
@@ -74,6 +94,16 @@ public class ProfileFragment extends Fragment {
         String newEmail = email.getText().toString().trim();
         String newPassword = password.getText().toString().trim();
 
+        String gender = "";
+
+        if (male.isChecked()){
+            gender = "male";
+        }else  if (female.isChecked()){
+            gender = "female";
+        }else {
+            return;
+        }
+
         if (newName.isEmpty() || newEmail.isEmpty()) {
             Toast.makeText(getContext(), "Fields cannot be empty", Toast.LENGTH_SHORT).show();
             return;
@@ -83,7 +113,7 @@ public class ProfileFragment extends Fragment {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         String userId = currentUser.getUid();
-        User updatedUser = new User(userId, newName, newEmail);
+        User updatedUser = new User(userId, newName, newEmail, gender, "users");
 
         databaseReference.child(userId).setValue(updatedUser)
                 .addOnSuccessListener(aVoid -> {

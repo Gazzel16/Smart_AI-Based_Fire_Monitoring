@@ -43,7 +43,7 @@ public class TempSensor {
                 Double temp = snapshot.child("temperature").getValue(Double.class);
 
                 if (temp != null){
-                    timeFireDetected.setText("Analog Output: " + String.valueOf(temp) + " °C");
+                    timeFireDetected.setText("Temperature Analog Output: " + String.valueOf(temp) + " °C");
                 }
 
                 if (temp != null && temp > 40) {
