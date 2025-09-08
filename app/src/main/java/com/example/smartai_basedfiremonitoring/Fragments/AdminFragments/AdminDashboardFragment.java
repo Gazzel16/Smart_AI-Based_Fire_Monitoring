@@ -16,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.smartai_basedfiremonitoring.Activity.Admin_ViewUsers;
 import com.example.smartai_basedfiremonitoring.Adapter.AdminDashBoardAdapter;
 import com.example.smartai_basedfiremonitoring.Fragments.AdminFragments.ChartHandler.AdminCountChart;
 import com.example.smartai_basedfiremonitoring.Fragments.AdminFragments.ChartHandler.UserCountChart;
@@ -63,8 +62,12 @@ public class AdminDashboardFragment extends Fragment {
         adminCountChart = view.findViewById(R.id.adminCountChart);
 
         constraintViewUser.setOnClickListener(v -> {
-            Intent intent = new Intent(getContext(), Admin_ViewUsers.class);
-            startActivity(intent);
+           Fragment fragment = new Admin_ViewUsersFragment();
+
+            getParentFragmentManager().beginTransaction() // if inside a fragment
+                    .replace(R.id.fragment_container, fragment) // your container id
+                    .addToBackStack(null) // so you can go back
+                    .commit();
         });
 
 

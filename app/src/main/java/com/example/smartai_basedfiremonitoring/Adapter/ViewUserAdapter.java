@@ -1,5 +1,8 @@
 package com.example.smartai_basedfiremonitoring.Adapter;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,9 +35,20 @@ public class ViewUserAdapter extends RecyclerView.Adapter<ViewUserAdapter.UserVi
     @Override
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
         User user = userList.get(position);
-        holder.username.setText(user.getUsername());
-        holder.email.setText(user.getEmail());
-        holder.id.setText(user.getId());
+        holder.username.setText("Name: " + user.getUsername());
+        holder.email.setText("Email: " + user.getEmail());
+        holder.id.setText("ID: " + user.getId());
+
+        if ("Male".equalsIgnoreCase(user.getGender())) {
+            holder.gender.setText("Male");
+            holder.gender.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#3F51B5")));
+        } else if ("Female".equalsIgnoreCase(user.getGender())) {
+            holder.gender.setText("Female");
+            holder.gender.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#E91E63")));
+        } else {
+            Log.d("gender", "gender not found");
+        }
+
     }
 
     @Override
@@ -43,13 +57,14 @@ public class ViewUserAdapter extends RecyclerView.Adapter<ViewUserAdapter.UserVi
     }
 
     public static class UserViewHolder extends RecyclerView.ViewHolder {
-        TextView username, email, id;
+        TextView username, email, id, gender;
 
         public UserViewHolder(@NonNull View itemView) {
             super(itemView);
             id = itemView.findViewById(R.id.id);
             username = itemView.findViewById(R.id.username);
-            email = itemView.findViewById(R.id.textView14);
+            email = itemView.findViewById(R.id.email);
+            gender = itemView.findViewById(R.id.gender);
         }
     }
 
