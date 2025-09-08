@@ -58,11 +58,21 @@ public class AdminDashboardFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_admin_dashboard, container, false);
 
         ConstraintLayout constraintViewUser= view.findViewById(R.id.constraintViewUser);
+        ConstraintLayout constraintViewAdmin= view.findViewById(R.id.constraintViewAdmin);
         userCountChart = view.findViewById(R.id.userCountChart);
         adminCountChart = view.findViewById(R.id.adminCountChart);
 
         constraintViewUser.setOnClickListener(v -> {
            Fragment fragment = new Admin_ViewUsersFragment();
+
+            getParentFragmentManager().beginTransaction() // if inside a fragment
+                    .replace(R.id.fragment_container, fragment) // your container id
+                    .addToBackStack(null) // so you can go back
+                    .commit();
+        });
+
+        constraintViewAdmin.setOnClickListener(v -> {
+            Fragment fragment = new Admin_ViewAdminFragment();
 
             getParentFragmentManager().beginTransaction() // if inside a fragment
                     .replace(R.id.fragment_container, fragment) // your container id
