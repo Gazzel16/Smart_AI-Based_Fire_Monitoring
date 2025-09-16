@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.example.smartai_basedfiremonitoring.Adapter.AdminDashBoardAdapter;
 import com.example.smartai_basedfiremonitoring.Fragments.AdminFragments.ChartHandler.AdminCountChart;
+import com.example.smartai_basedfiremonitoring.Fragments.AdminFragments.ChartHandler.FireReportChart;
 import com.example.smartai_basedfiremonitoring.Fragments.AdminFragments.ChartHandler.UserCountChart;
 import com.example.smartai_basedfiremonitoring.Model.AdminDashBoardModel;
 import com.example.smartai_basedfiremonitoring.R;
@@ -43,7 +44,7 @@ public class AdminDashboardFragment extends Fragment {
     AdminDashBoardAdapter adapter;
     List<AdminDashBoardModel> adminDashboardList;
 
-    BarChart userCountChart, adminCountChart;
+    BarChart userCountChart, adminCountChart, fireReportCountChart;
 
     ValueEventListener userListener, adminListener;
 
@@ -61,6 +62,7 @@ public class AdminDashboardFragment extends Fragment {
         ConstraintLayout constraintViewAdmin= view.findViewById(R.id.constraintViewAdmin);
         userCountChart = view.findViewById(R.id.userCountChart);
         adminCountChart = view.findViewById(R.id.adminCountChart);
+        fireReportCountChart = view.findViewById(R.id.fireReportCountChart);
 
         constraintViewUser.setOnClickListener(v -> {
            Fragment fragment = new Admin_ViewUsersFragment();
@@ -85,7 +87,8 @@ public class AdminDashboardFragment extends Fragment {
         userCount(view);
         UserCountChart.userChart(userCountChart, view, this);
         AdminCountChart.adminChart(adminCountChart, view, this);
-        fireIncidentOverview(view);
+        FireReportChart.fireReportChart(fireReportCountChart, view, this);
+//        fireIncidentOverview(view);
         return view;
     }
 
@@ -142,19 +145,19 @@ public class AdminDashboardFragment extends Fragment {
         });
     }
 
-    public void fireIncidentOverview(View view){
-        // 1. Initialize RecyclerView
-        recyclerView = view.findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        // 2. Create fake data
-        adminDashboardList = new ArrayList<>();
-        adminDashboardList.add(new AdminDashBoardModel(R.drawable.flame_incident_report_icon, "Fire Incident Report", 70, "100+"));
-        adminDashboardList.add(new AdminDashBoardModel(R.drawable.flame_incident_confirmed_report_icon, "Confirm Incident", 70, "100+"));
-        adminDashboardList.add(new AdminDashBoardModel(R.drawable.flame_incident_false_report_icon, "False Incident", 70, "100+"));
-
-        // 3. Set adapter
-        adapter = new AdminDashBoardAdapter(getContext(), adminDashboardList);
-        recyclerView.setAdapter(adapter);
-    }
+//    public void fireIncidentOverview(View view){
+//        // 1. Initialize RecyclerView
+//        recyclerView = view.findViewById(R.id.recyclerView);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+//
+//        // 2. Create fake data
+//        adminDashboardList = new ArrayList<>();
+//        adminDashboardList.add(new AdminDashBoardModel(R.drawable.flame_incident_report_icon, "Fire Incident Report", 70, "100+"));
+//        adminDashboardList.add(new AdminDashBoardModel(R.drawable.flame_incident_confirmed_report_icon, "Confirm Incident", 70, "100+"));
+//        adminDashboardList.add(new AdminDashBoardModel(R.drawable.flame_incident_false_report_icon, "False Incident", 70, "100+"));
+//
+//        // 3. Set adapter
+//        adapter = new AdminDashBoardAdapter(getContext(), adminDashboardList);
+//        recyclerView.setAdapter(adapter);
+//    }
 }
