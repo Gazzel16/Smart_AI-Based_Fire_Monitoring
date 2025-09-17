@@ -1,6 +1,9 @@
     package com.example.smartai_basedfiremonitoring.Adapter.AdminFireIncidentReportHandler;
 
 
+    import android.os.Handler;
+    import android.os.Looper;
+
     import com.google.firebase.database.DatabaseReference;
     import com.google.firebase.database.FirebaseDatabase;
 
@@ -27,6 +30,13 @@
 
             dbFireDetected.updateChildren(fireUpdate);
             dbRef.updateChildren(updates);
+
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                Map<String, Object> resetUpdate = new HashMap<>();
+                resetUpdate.put("flame",false);
+
+                dbFireDetected.updateChildren(resetUpdate);
+            }, 50000);
         }
 
     }
