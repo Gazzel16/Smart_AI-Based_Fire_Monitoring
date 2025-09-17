@@ -2,4 +2,11 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Distinct light versions -->
+    <color name="light_pink">#F48FB1</color>   <!-- brighter pink -->
+    <color name="light_red">#EF9A9A</color>    <!-- softer red -->
+    <color name="light_orange">#FFCC80</color>
+
+
 </resources>

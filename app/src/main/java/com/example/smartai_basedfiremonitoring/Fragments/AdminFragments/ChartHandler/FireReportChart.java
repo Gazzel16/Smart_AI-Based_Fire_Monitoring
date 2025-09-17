@@ -27,21 +27,23 @@ public class FireReportChart {
 
         // === Chart styling (do this once) ===
         XAxis xAxis = fireReportChart.getXAxis();
-        xAxis.setValueFormatter(new IndexAxisValueFormatter(new String[]{"All", "Confirmed", "False"}));
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setGranularity(1f);
-        xAxis.setLabelCount(3, true);
         xAxis.setDrawGridLines(false);
-        xAxis.setTextSize(12f);
+        xAxis.setDrawLabels(false);   // completely hides 0,1,2
+        xAxis.setDrawGridLines(false);
+        xAxis.setDrawAxisLine(true);
+        xAxis.setTextColor(Color.WHITE);
 
         YAxis leftAxis = fireReportChart.getAxisLeft();
         leftAxis.setAxisMinimum(0f);
         leftAxis.setAxisMaximum(3f);
-        leftAxis.setDrawGridLines(false);
-
+        leftAxis.setDrawGridLines(true);
+        leftAxis.setGridColor(Color.WHITE);
         fireReportChart.getAxisRight().setEnabled(false);
         fireReportChart.getDescription().setEnabled(false);
         fireReportChart.getLegend().setEnabled(false);
+        leftAxis.setTextColor(Color.WHITE);
+
 
         // === Firebase listener ===
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("users");
@@ -80,12 +82,12 @@ public class FireReportChart {
 
                 BarDataSet dataSet = new BarDataSet(entries, "Fire Reports");
                 dataSet.setColors(new int[]{
-                        Color.parseColor("#FF5722"), // All
+                        Color.parseColor("#FFCC80"), // All
                         Color.parseColor("#4CAF50"), // Confirmed
-                        Color.parseColor("#F44336")  // False
+                        Color.parseColor("#F48FB1")  // False
                 });
                 dataSet.setValueTextSize(12f);
-                dataSet.setValueTextColor(Color.BLACK);
+                dataSet.setValueTextColor(Color.WHITE);
 
                 BarData barData = new BarData(dataSet);
                 barData.setBarWidth(0.6f);

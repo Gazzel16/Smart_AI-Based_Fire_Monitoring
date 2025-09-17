@@ -33,21 +33,21 @@ public class AdminCountChart {
         xAxis.setDrawLabels(true);
         xAxis.setDrawGridLines(false);
         xAxis.setDrawAxisLine(true);
-
+        xAxis.setTextColor(Color.WHITE);
         // Y axis styling
         YAxis leftAxis = adminCountChart.getAxisLeft();
         leftAxis.setDrawLabels(true);
         leftAxis.setDrawGridLines(true);
         leftAxis.setGridColor(Color.WHITE);
+        leftAxis.setTextColor(Color.WHITE);
         leftAxis.setDrawAxisLine(false);
         adminCountChart.getAxisRight().setEnabled(false);
 
         // Dataset
         BarDataSet dataSet = new BarDataSet(new ArrayList<>(), "");
-        int transparentPink = Color.argb(180, 255, 105, 180);
-        dataSet.setColor(transparentPink);
+        dataSet.setColor(Color.parseColor("#EB759D"));
+        dataSet.setBarBorderColor(Color.parseColor("#AFE91E63"));
         dataSet.setDrawValues(true);
-
         BarData barData = new BarData(dataSet);
         adminCountChart.setData(barData);
 

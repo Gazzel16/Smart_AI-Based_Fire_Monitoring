@@ -21,6 +21,7 @@ import com.example.smartai_basedfiremonitoring.Fragments.AdminFragments.ChartHan
 import com.example.smartai_basedfiremonitoring.Fragments.AdminFragments.ChartHandler.FireReportChart;
 import com.example.smartai_basedfiremonitoring.Fragments.AdminFragments.ChartHandler.UserCountChart;
 import com.example.smartai_basedfiremonitoring.Model.AdminDashBoardModel;
+import com.example.smartai_basedfiremonitoring.Model.FireReport;
 import com.example.smartai_basedfiremonitoring.R;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.XAxis;
@@ -48,7 +49,7 @@ public class AdminDashboardFragment extends Fragment {
 
     ValueEventListener userListener, adminListener;
 
-    TextView userCount, adminCount;
+    TextView userCount, adminCount, fireReport;
 
     DatabaseReference dbRef;
 
@@ -57,9 +58,9 @@ public class AdminDashboardFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_admin_dashboard, container, false);
-
         ConstraintLayout constraintViewUser= view.findViewById(R.id.constraintViewUser);
         ConstraintLayout constraintViewAdmin= view.findViewById(R.id.constraintViewAdmin);
+        ConstraintLayout constraintViewFireReport= view.findViewById(R.id.constraintViewFireReport);
         userCountChart = view.findViewById(R.id.userCountChart);
         adminCountChart = view.findViewById(R.id.adminCountChart);
         fireReportCountChart = view.findViewById(R.id.fireReportCountChart);
@@ -73,8 +74,8 @@ public class AdminDashboardFragment extends Fragment {
                     .commit();
         });
 
-        constraintViewAdmin.setOnClickListener(v -> {
-            Fragment fragment = new Admin_ViewAdminFragment();
+        constraintViewFireReport.setOnClickListener(v -> {
+            Fragment fragment = new FireReportListFragment();
 
             getParentFragmentManager().beginTransaction() // if inside a fragment
                     .replace(R.id.fragment_container, fragment) // your container id
@@ -83,6 +84,7 @@ public class AdminDashboardFragment extends Fragment {
         });
 
 
+        fireReportCount(view);
         adminCount(view);
         userCount(view);
         UserCountChart.userChart(userCountChart, view, this);
@@ -92,6 +94,39 @@ public class AdminDashboardFragment extends Fragment {
         return view;
     }
 
+    public void fireReportCount(View view){
+        fireReport = view.findViewById(R.id.fireReport);
+        dbRef = FirebaseDatabase.getInstance().getReference("users");
+
+        dbRef.addValueEventListener(new ValueEventListener() {
+
+            int newReport = 0;
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshotUsers : snapshot.getChildren()){
+                    DataSnapshot reportsSnapshot = dataSnapshotUsers.child("reports");
+
+                    for (DataSnapshot reportSnapshot :reportsSnapshot.getChildren()){
+                        FireReport fireReport = reportSnapshot.getValue(FireReport.class);
+
+                        if (fireReport != null){
+                            newReport++;
+                        }
+                    }
+                }
+                if (adapter != null){
+                    adapter.notifyDataSetChanged();
+                }
+                fireReport.setText("Reports: +" + String.valueOf(newReport));
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
     public void adminCount(View view){
         adminCount = view.findViewById(R.id.adminCount);
         dbRef = FirebaseDatabase.getInstance().getReference("users");

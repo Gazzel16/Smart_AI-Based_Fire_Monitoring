@@ -35,19 +35,21 @@ public class UserCountChart {
         xAxis.setDrawLabels(true);
         xAxis.setDrawGridLines(false);
         xAxis.setDrawAxisLine(true);
-
+        xAxis.setTextColor(Color.WHITE);
         // Y axis styling
         YAxis leftAxis = userCountChart.getAxisLeft();
         leftAxis.setDrawLabels(true);
         leftAxis.setDrawGridLines(true);
         leftAxis.setGridColor(Color.WHITE);
+        leftAxis.setTextColor(Color.WHITE);
         leftAxis.setDrawAxisLine(false);
         userCountChart.getAxisRight().setEnabled(false);
 
         // Dataset
-        BarDataSet dataSet = new BarDataSet(new ArrayList<>(), "");
-        int transparentBlue = Color.argb(180, 0, 0, 255);
-        dataSet.setColor(transparentBlue);
+        BarDataSet dataSet = new BarDataSet(new ArrayList<>(), "");;
+        dataSet.setColor(Color.parseColor("#C400BCD4"));
+        dataSet.setBarBorderColor(Color.parseColor("#C400BCD4")); // outline color
+        dataSet.setBarBorderWidth(2f); // outline thickness
         dataSet.setDrawValues(true);
 
         BarData barData = new BarData(dataSet);
