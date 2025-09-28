@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smartai_basedfiremonitoring.Adapter.AdminFireIncidentReportHandler.AdminConfirmReport;
@@ -67,27 +68,12 @@ public class AdminFireIncidentReportAdapter extends RecyclerView.Adapter<AdminFi
 
     public void reportConfirmation(FireReportViewHolder holder, FireReport report) {
         if (report.isConfirmation()) {
-            holder.confirmation.setText("Confirmed");
-            holder.confirmation.setTextColor(context.getResources().getColor(android.R.color.holo_green_dark));
 
-            // disable confirm + false buttons
-            holder.confirmReport.setEnabled(false);
-            holder.confirmReport.setTextColor(Color.GRAY);
-
-            holder.falseReport.setEnabled(false);
-            holder.falseReport.setTextColor(Color.GRAY);
+            holder.cardViewFireReport.setVisibility(View.GONE);
 
         } else if (report.isFalseReport()) {
-            holder.confirmation.setText("False Report");
-            holder.confirmation.setTextColor(context.getResources().getColor(android.R.color.holo_red_dark));
 
-            // disable confirm + false buttons
-            holder.confirmReport.setEnabled(false);
-            holder.confirmReport.setTextColor(Color.GRAY);
-
-            holder.falseReport.setEnabled(false);
-            holder.falseReport.setTextColor(Color.GRAY);
-            holder.falseReport.setText("False Report");
+            holder.cardViewFireReport.setVisibility(View.GONE);
 
         } else {
             holder.confirmation.setText("Not Confirmed");
@@ -112,6 +98,8 @@ public class AdminFireIncidentReportAdapter extends RecyclerView.Adapter<AdminFi
         TextView name, description, timeReported, confirmation;
         Button confirmReport, falseReport;
 
+        CardView cardViewFireReport;
+
         public FireReportViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.name);
@@ -120,6 +108,7 @@ public class AdminFireIncidentReportAdapter extends RecyclerView.Adapter<AdminFi
             confirmation = itemView.findViewById(R.id.confirmation);
             confirmReport = itemView.findViewById(R.id.confirmReport);
             falseReport = itemView.findViewById(R.id.falseReport);
+            cardViewFireReport = itemView.findViewById(R.id.cardViewFireReport);
         }
     }
 }

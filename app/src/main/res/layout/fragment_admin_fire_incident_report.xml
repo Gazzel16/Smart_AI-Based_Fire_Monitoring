@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context=".Fragments.UserFragments.FireUpdateFragment">
+    android:fitsSystemWindows="true">
 
     <TextView
         android:id="@+id/textView21"
@@ -103,7 +102,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/linearLayout8" />
 
                 <TextView
-                    android:id="@+id/emergency"
+                    android:id="@+id/emergencyBtn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="12dp"
@@ -111,7 +110,7 @@
                     android:backgroundTint="@color/white"
                     android:foregroundGravity="center"
                     android:gravity="center"
-                    android:text="Emergency Hotline"
+                    android:text="Inform Residence"
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

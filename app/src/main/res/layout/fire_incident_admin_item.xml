@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/cardViewFireReport"
     app:cardCornerRadius="12dp"
     android:elevation="5dp"
     android:layout_margin="8dp"

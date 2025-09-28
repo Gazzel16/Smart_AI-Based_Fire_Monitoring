@@ -74,6 +74,15 @@ public class AdminDashboardFragment extends Fragment {
                     .commit();
         });
 
+        constraintViewAdmin.setOnClickListener(v -> {
+            Fragment fragment = new Admin_ViewAdminFragment();
+
+            getParentFragmentManager().beginTransaction() // if inside a fragment
+                    .replace(R.id.fragment_container, fragment) // your container id
+                    .addToBackStack(null) // so you can go back
+                    .commit();
+        });
+
         constraintViewFireReport.setOnClickListener(v -> {
             Fragment fragment = new FireReportListFragment();
 

@@ -13,6 +13,7 @@
     public class AdminConfirmReport {
 
         public static void confirm(String userId, String reportId) {
+
             DatabaseReference dbRef = FirebaseDatabase.getInstance()
                     .getReference("users")
                     .child(userId)
