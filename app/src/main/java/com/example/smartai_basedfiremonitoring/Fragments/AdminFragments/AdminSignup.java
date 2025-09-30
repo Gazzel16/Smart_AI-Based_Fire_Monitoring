@@ -87,7 +87,7 @@ public class AdminSignup extends Fragment {
                     if (task.isSuccessful()){
 
                         String uId = mAuth.getCurrentUser().getUid();
-                        User user = new User(uId, email, password, gender, "admin");
+                        User user = new User(uId, username, email, gender, "admin");
 
                         databaseReference.child(uId).setValue(user)
                                 .addOnCompleteListener(dbTask ->{

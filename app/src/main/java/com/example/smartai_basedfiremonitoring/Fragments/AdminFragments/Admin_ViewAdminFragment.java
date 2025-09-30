@@ -50,12 +50,12 @@ public class Admin_ViewAdminFragment extends Fragment {
         userList = new ArrayList<>();
         adapter = new ViewUserAdapter(userList);
         recyclerView.setAdapter(adapter);
-        userListView(view);
+        userListView();
 
         return view;
     }
 
-    public void userListView(View view){
+    public void userListView(){
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
