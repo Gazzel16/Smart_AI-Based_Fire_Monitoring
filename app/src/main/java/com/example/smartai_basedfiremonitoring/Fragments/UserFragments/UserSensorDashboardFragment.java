@@ -75,7 +75,6 @@
         @Override
         public void onDestroyView() {
             super.onDestroyView();
-
             // stop Firebase listeners to avoid crashes
             TempSensor.removeListener();
             HumidSensor.removeListener();

@@ -1,9 +1,6 @@
 package com.example.smartai_basedfiremonitoring.Activity;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -11,13 +8,10 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import com.airbnb.lottie.LottieAnimationView;
-import com.example.smartai_basedfiremonitoring.ChatBot.ChatBotFragment;
+import com.example.smartai_basedfiremonitoring.Fragments.ChatBotFragments.ChatBotFragment;
 import com.example.smartai_basedfiremonitoring.Fragments.UserFragments.FireUpdateFragment;
 import com.example.smartai_basedfiremonitoring.Fragments.UserFragments.SettingsFragment;
 import com.example.smartai_basedfiremonitoring.Fragments.UserFragments.UserSensorDashboardFragment;
-import com.example.smartai_basedfiremonitoring.Gemini.GeminiAdvisory;
-import com.example.smartai_basedfiremonitoring.Gemini.GeminiAdvisoryDialog;
 import com.example.smartai_basedfiremonitoring.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -69,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
                     .beginTransaction()
                     .replace(R.id.fragment_container, fragment)
                     .commit();
+            geminiAdvisory.setVisibility(View.GONE);
         });
     }
 //    private void getAdviceFromGemini(){

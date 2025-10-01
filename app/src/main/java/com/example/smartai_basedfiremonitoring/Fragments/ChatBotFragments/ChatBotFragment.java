@@ -1,4 +1,4 @@
-package com.example.smartai_basedfiremonitoring.ChatBot;
+package com.example.smartai_basedfiremonitoring.Fragments.ChatBotFragments;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,16 +10,22 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smartai_basedfiremonitoring.Adapter.ChatAdapter;
+import com.example.smartai_basedfiremonitoring.Fragments.UserFragments.HomeFragment;
+import com.example.smartai_basedfiremonitoring.Fragments.UserFragments.UserSensorDashboardFragment;
 import com.example.smartai_basedfiremonitoring.Model.ChatBotModel;
+import com.example.smartai_basedfiremonitoring.Model.User;
 import com.example.smartai_basedfiremonitoring.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -45,10 +51,10 @@ public class ChatBotFragment extends Fragment {
 
     private LinearLayout linearLayout;
     private EditText inputMessage;
-    private ImageView sendBtn;
+    private ImageView sendBtn, backBtn;
     private RecyclerView recyclerView;
     private ChatAdapter chatAdapter;
-    private static List<ChatBotModel> chatList = new ArrayList<>();
+    private List<ChatBotModel> chatList = new ArrayList<>();
     private OkHttpClient client = new OkHttpClient();
 
     private static final String BASE_URL = "http://192.168.1.4:5000/generate-advisory"; // change to your backend IP
@@ -63,6 +69,9 @@ public class ChatBotFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_chat_bot, container, false);
 
+        TextView input1 = view.findViewById(R.id.input1);
+        TextView input2 = view.findViewById(R.id.input2);
+        TextView input3 = view.findViewById(R.id.input3);
         linearLayout = view.findViewById(R.id.linearLayout);
 
         inputMessage = view.findViewById(R.id.inputMessage);
@@ -97,6 +106,37 @@ public class ChatBotFragment extends Fragment {
             }
         });
 
+        backBtn = view.findViewById(R.id.backBtn);
+        backBtn.setOnClickListener(v -> {
+            onDestroy();
+            Fragment fragment = new UserSensorDashboardFragment();
+            requireActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, fragment) // make sure R.id.fragment_container is your FrameLayout
+                    .addToBackStack(null) // optional: adds transaction to back stack so you can navigate back
+                    .commit();
+
+        });
+
+        // ✅ Reusable click listener for quick questions
+        View.OnClickListener quickQuestionClick = v -> {
+            String message = ((TextView) v).getText().toString();
+
+            // 1️⃣ Add user message
+            addMessage(message, false);
+
+            // 2️⃣ Call backend with latest Firebase values
+            sendToBackend(latestTemp, latestHumidity);
+
+            // 3️⃣ Hide quick reply options
+            linearLayout.setVisibility(View.GONE);
+        };
+
+        // ✅ Attach listeners
+        input1.setOnClickListener(quickQuestionClick);
+        input2.setOnClickListener(quickQuestionClick);
+        input3.setOnClickListener(quickQuestionClick);
+
         sendBtn.setOnClickListener(v -> {
             String message = inputMessage.getText().toString().trim();
             if (TextUtils.isEmpty(message)) {
@@ -113,6 +153,22 @@ public class ChatBotFragment extends Fragment {
             inputMessage.setText("");
             linearLayout.setVisibility(View.GONE);
         });
+
+        requireActivity().getOnBackPressedDispatcher().addCallback(
+                getViewLifecycleOwner(),
+                new OnBackPressedCallback(true) {
+                    @Override
+                    public void handleOnBackPressed() {
+                        onDestroy();
+                        Fragment fragment = new UserSensorDashboardFragment();
+                        requireActivity().getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragment_container, fragment) // make sure R.id.fragment_container is your FrameLayout
+                                .addToBackStack(null) // optional: adds transaction to back stack so you can navigate back
+                                .commit();
+                    }
+                }
+        );
 
         return view;
     }
@@ -169,5 +225,25 @@ public class ChatBotFragment extends Fragment {
                 }
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        BottomNavigationView bottomNav = requireActivity().findViewById(R.id.bottom_navigation);
+        if (bottomNav != null) {
+            bottomNav.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        BottomNavigationView bottomNav = requireActivity().findViewById(R.id.bottom_navigation);
+        ImageView geminiAdvisory = requireActivity().findViewById(R.id.geminiAdvisory);
+        if (bottomNav != null) {
+            bottomNav.setVisibility(View.VISIBLE);
+            geminiAdvisory.setVisibility(View.VISIBLE);
+        }
     }
 }
