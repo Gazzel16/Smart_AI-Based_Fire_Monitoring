@@ -73,8 +73,8 @@ public class FireUpdateFragment extends Fragment {
             }
 
             if (hasConfirmed){
-                description.setText("Fire Alert Detected");
-                fireDetected.setText("Fire detected in barangay ilaya alabang, \\nplease evacuate in the nearest evacuation center");
+                fireDetected.setText("Fire Alert Detected");
+                description.setText("Fire detected in barangay ilaya alabang, \\nplease evacuate in the nearest evacuation center");
             } else {
                 description.setText("No details until further notice");
                 fireDetected.setText("No Fire Detected");

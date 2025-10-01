@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.example.smartai_basedfiremonitoring.ChatBot.ChatBotFragment;
 import com.example.smartai_basedfiremonitoring.Fragments.UserFragments.FireUpdateFragment;
 import com.example.smartai_basedfiremonitoring.Fragments.UserFragments.SettingsFragment;
 import com.example.smartai_basedfiremonitoring.Fragments.UserFragments.UserSensorDashboardFragment;
@@ -62,52 +63,62 @@ public class MainActivity extends AppCompatActivity {
 
     private void getAdviceFromGemini(){
         ImageView geminiAdvisory = findViewById(R.id.geminiAdvisory);
-        LottieAnimationView geminiLottie = findViewById(R.id.geminiLottie);
-
         geminiAdvisory.setOnClickListener(v -> {
-            // 1. Show Lottie now
-            geminiLottie.setVisibility(View.VISIBLE);
-            geminiLottie.playAnimation();
-
-            // 2. Delay 2s, then hide Lottie + show dialog
-            new Handler(Looper.getMainLooper()).postDelayed(() -> {
-                geminiLottie.cancelAnimation();
-                geminiLottie.setVisibility(View.GONE);
-
-                // 3. Show dialog
-                GeminiAdvisoryDialog dialog = new GeminiAdvisoryDialog();
-                dialog.show(getSupportFragmentManager(), "GeminiDialog");
-
-                // 4. Start HTTP request
-                GeminiAdvisory.geminiAdvisory(this, dialog);
-
-            }, 2000); // wait 2 seconds
+            Fragment fragment = new ChatBotFragment();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, fragment)
+                    .commit();
         });
-
-        geminiAdvisory.setOnTouchListener(new View.OnTouchListener() {
-            float dX, dY;
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        dX = v.getX() - event.getRawX();
-                        dY = v.getY() - event.getRawY();
-                        return false;
-
-                    case MotionEvent.ACTION_MOVE:
-                        v.setX(event.getRawX() + dX);
-                        v.setY(event.getRawY() + dY);
-                        return true;
-
-                    default:
-                        return false;
-                }
-            }
-        });
-
-        geminiAdvisory.bringToFront();
-        geminiAdvisory.invalidate();
     }
+//    private void getAdviceFromGemini(){
+//        ImageView geminiAdvisory = findViewById(R.id.geminiAdvisory);
+//        LottieAnimationView geminiLottie = findViewById(R.id.geminiLottie);
+//
+//        geminiAdvisory.setOnClickListener(v -> {
+//            // 1. Show Lottie now
+//            geminiLottie.setVisibility(View.VISIBLE);
+//            geminiLottie.playAnimation();
+//
+//            // 2. Delay 2s, then hide Lottie + show dialog
+//            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+//                geminiLottie.cancelAnimation();
+//                geminiLottie.setVisibility(View.GONE);
+//
+//                // 3. Show dialog
+//                GeminiAdvisoryDialog dialog = new GeminiAdvisoryDialog();
+//                dialog.show(getSupportFragmentManager(), "GeminiDialog");
+//
+//                // 4. Start HTTP request
+//                GeminiAdvisory.geminiAdvisory(this, dialog);
+//
+//            }, 2000); // wait 2 seconds
+//        });
+//
+//        geminiAdvisory.setOnTouchListener(new View.OnTouchListener() {
+//            float dX, dY;
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                switch (event.getAction()) {
+//                    case MotionEvent.ACTION_DOWN:
+//                        dX = v.getX() - event.getRawX();
+//                        dY = v.getY() - event.getRawY();
+//                        return false;
+//
+//                    case MotionEvent.ACTION_MOVE:
+//                        v.setX(event.getRawX() + dX);
+//                        v.setY(event.getRawY() + dY);
+//                        return true;
+//
+//                    default:
+//                        return false;
+//                }
+//            }
+//        });
+//
+//        geminiAdvisory.bringToFront();
+//        geminiAdvisory.invalidate();
+//    }
     private void loadFragment(Fragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()

@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
@@ -17,6 +18,7 @@ import com.example.smartai_basedfiremonitoring.Activity.LoginActivity;
 import com.example.smartai_basedfiremonitoring.Activity.SignUpActivity;
 import com.example.smartai_basedfiremonitoring.Model.User;
 import com.example.smartai_basedfiremonitoring.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -25,6 +27,7 @@ public class AdminSignup extends Fragment {
 
     EditText usernameEditText, emailEditText, passwordEditText;
     Button registerBtn;
+    ImageView backBtn;
     DatabaseReference databaseReference;
     FirebaseAuth mAuth;
 
@@ -40,6 +43,7 @@ public class AdminSignup extends Fragment {
         emailEditText = view.findViewById(R.id.email);
         passwordEditText = view.findViewById(R.id.password);
         registerBtn = view.findViewById(R.id.register);
+        backBtn = view.findViewById(R.id.backBtn);
 
         female = view.findViewById(R.id.female);
         male = view.findViewById(R.id.male);
@@ -48,13 +52,23 @@ public class AdminSignup extends Fragment {
         mAuth = FirebaseAuth.getInstance();
 
        registerBtn.setOnClickListener(v -> {
-           registerAdmin(view);
+           registerAdmin();
        });
+
+        backBtn.setOnClickListener(v -> {
+            onDestroy();
+            Fragment setting = new AdminSettingsFragment();
+            requireActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, setting)
+                    .addToBackStack(null)
+                    .commit();
+        });
 
         return view;
     }
 
-    public void registerAdmin(View view){
+    public void registerAdmin(){
         String username = usernameEditText.getText().toString().trim();
         String email = emailEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
@@ -94,6 +108,11 @@ public class AdminSignup extends Fragment {
 
                                     if (dbTask.isSuccessful()){
                                         Toast.makeText(getContext(), "Admin registered successfully", Toast.LENGTH_SHORT).show();
+
+                                        usernameEditText.setText("");
+                                        emailEditText.setText("");
+                                        passwordEditText.setText("");
+
                                     } else {
                                         Toast.makeText(getContext(), "Failed to save user data", Toast.LENGTH_SHORT).show();
                                     }
@@ -104,6 +123,22 @@ public class AdminSignup extends Fragment {
 
 
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+        BottomNavigationView bottomNav = requireActivity().findViewById(R.id.bottom_navigation);
+        if (bottomNav != null) {
+            bottomNav.setVisibility(View.GONE);
+        }
+    }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        BottomNavigationView bottomNav = requireActivity().findViewById(R.id.bottom_navigation);
+        if (bottomNav != null) {
+            bottomNav.setVisibility(View.VISIBLE);
+        }
+    }
 
 }
