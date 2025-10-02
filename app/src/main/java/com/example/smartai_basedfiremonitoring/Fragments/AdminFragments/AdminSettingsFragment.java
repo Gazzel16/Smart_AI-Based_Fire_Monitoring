@@ -3,6 +3,7 @@ package com.example.smartai_basedfiremonitoring.Fragments.AdminFragments;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -84,6 +85,7 @@ private RecyclerView rvSetting;
                     break;
             }
         });
+
 
         // 3. Setup RecyclerView
         rvSetting.setLayoutManager(new LinearLayoutManager(getContext()));

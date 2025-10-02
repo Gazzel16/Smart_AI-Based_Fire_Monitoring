@@ -10,10 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.example.smartai_basedfiremonitoring.Fragments.AdminFragments.AdminSettingsFragment;
 import com.example.smartai_basedfiremonitoring.Model.User;
 import com.example.smartai_basedfiremonitoring.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -37,6 +39,7 @@ public class ProfileFragment extends Fragment {
         if (bottom_navigation != null){
             bottom_navigation.setVisibility(View.GONE);
         }
+
         Profile(view);
         return view;
     }
