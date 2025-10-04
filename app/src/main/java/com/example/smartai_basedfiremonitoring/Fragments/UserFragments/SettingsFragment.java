@@ -12,13 +12,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.smartai_basedfiremonitoring.Activity.LoginActivity;
-import com.example.smartai_basedfiremonitoring.Activity.OptionItemAdapter;
-import com.example.smartai_basedfiremonitoring.Fragments.AdminFragments.AdminSignup;
-import com.example.smartai_basedfiremonitoring.Fragments.AdminFragments.ESP32_WIFI_CredentialsFragment;
+import com.example.smartai_basedfiremonitoring.Adapter.OptionItemAdapter;
 import com.example.smartai_basedfiremonitoring.Model.OptionItemModel;
 import com.example.smartai_basedfiremonitoring.R;
 import com.google.firebase.auth.FirebaseAuth;

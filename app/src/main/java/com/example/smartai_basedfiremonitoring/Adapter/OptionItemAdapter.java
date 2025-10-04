@@ -1,4 +1,4 @@
-package com.example.smartai_basedfiremonitoring.Activity;
+package com.example.smartai_basedfiremonitoring.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

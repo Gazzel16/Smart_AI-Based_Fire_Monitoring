@@ -16,6 +16,7 @@
     import com.example.smartai_basedfiremonitoring.R;
     import com.example.smartai_basedfiremonitoring.Sensors.FlameSensor;
     import com.example.smartai_basedfiremonitoring.Sensors.HumidSensor;
+    import com.example.smartai_basedfiremonitoring.Sensors.SmokeSensor;
     import com.example.smartai_basedfiremonitoring.Sensors.TempSensor;
     import com.github.mikephil.charting.charts.LineChart;
     import com.github.mikephil.charting.components.XAxis;
@@ -36,7 +37,7 @@
         TextView timeFireDetected, flameDetector,tempAnalogOutput,
                 tempStatus, humidAnalogOutput, humidStatus, smokeOutput, smokeStatus, username;
 
-        LineChart tempLineChart, humidLineChart;
+        LineChart tempLineChart, humidLineChart, smokeLineChart;
         private static ValueEventListener tempListener;
         @Nullable
         @Override
@@ -59,10 +60,12 @@
 
             tempLineChart = view.findViewById(R.id.tempLineChart);
             humidLineChart = view.findViewById(R.id.humidLineChart);
+            smokeLineChart = view.findViewById(R.id.smokeLineChart);
 
             FlameSensor.flameMonitoring(timeFireDetected, flameDetector, this);
             TempSensor.tempMonitoring(tempAnalogOutput, tempStatus, tempLineChart, this);
             HumidSensor.humidMonitoring(humidAnalogOutput, humidStatus, humidLineChart, this);
+            SmokeSensor.smokeSensor(smokeOutput, smokeStatus, smokeLineChart, this);
 
 //            UserNameHandler(view);
             return view;
