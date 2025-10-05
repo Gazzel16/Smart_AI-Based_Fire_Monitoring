@@ -87,6 +87,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
+                android:fontFamily="@font/quick_sand"
+                android:textColor="@android:color/darker_gray"
+                android:textStyle="bold"
                 android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -110,14 +113,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Fire Detected Time Report: "
-                android:textColor="@color/black" />
+                android:fontFamily="@font/quick_sand"
+                android:textStyle="bold"
+                android:textColor="#A96703" />
 
             <TextView
                 android:id="@+id/timeReported"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-
                 android:text="12/12/2025 12:45" />
         </LinearLayout>
 

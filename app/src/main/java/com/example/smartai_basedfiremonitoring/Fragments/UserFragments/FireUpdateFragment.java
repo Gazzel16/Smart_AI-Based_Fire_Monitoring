@@ -131,6 +131,8 @@ public class FireUpdateFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
 
         reports = new ArrayList<>();
+        reports = new ArrayList<>();
+
         adapter = new FireReportAdapter(requireContext(), reports);
         recyclerView.setAdapter(adapter);
 
