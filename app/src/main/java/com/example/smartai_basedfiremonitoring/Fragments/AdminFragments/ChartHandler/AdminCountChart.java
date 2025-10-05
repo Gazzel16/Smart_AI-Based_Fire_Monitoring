@@ -34,6 +34,7 @@ public class AdminCountChart {
         xAxis.setDrawGridLines(false);
         xAxis.setDrawAxisLine(true);
         xAxis.setTextColor(Color.WHITE);
+
         // Y axis styling
         YAxis leftAxis = adminCountChart.getAxisLeft();
         leftAxis.setDrawLabels(true);
@@ -43,33 +44,59 @@ public class AdminCountChart {
         leftAxis.setDrawAxisLine(false);
         adminCountChart.getAxisRight().setEnabled(false);
 
+        ArrayList<BarEntry> entries = new ArrayList<>();
         // Dataset
-        BarDataSet dataSet = new BarDataSet(new ArrayList<>(), "");
-        dataSet.setColor(Color.parseColor("#EB759D"));
-        dataSet.setBarBorderColor(Color.parseColor("#AFE91E63"));
+        BarDataSet dataSet = new BarDataSet(entries, "");
+        dataSet.setColors(
+                Color.parseColor("#FFCC80"), // All Admins
+                Color.parseColor("#2196F3"), // Male Admins
+                Color.parseColor("#EF9A9A")  // Female Admins
+        );
+        dataSet.setBarBorderColor(Color.parseColor("#FFFFFFFF"));
+        dataSet.setBarBorderWidth(2f);
         dataSet.setDrawValues(true);
+
         BarData barData = new BarData(dataSet);
+        barData.setBarWidth(0.6f);
         adminCountChart.setData(barData);
 
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("users");
         ValueEventListener userListener = new ValueEventListener() {
-            int index = 0;
 
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (fragment == null || !fragment.isAdded()) return;
 
-                int adminCount = 0;
+                int totalAdmins = 0;
+                int maleAdmins = 0;
+                int femaleAdmins = 0;
+
                 for (DataSnapshot child : snapshot.getChildren()) {
+
                     String role = child.child("role").getValue(String.class);
+                    String gender = child.child("gender").getValue(String.class);
                     if (role != null && role.equalsIgnoreCase("admin")) {
-                        adminCount++;
+                        totalAdmins++;
+
+                        if (gender != null) {
+                            if (gender.equalsIgnoreCase("male")) {
+                                maleAdmins++;
+                            } else if (gender.equalsIgnoreCase("female")) {
+                                femaleAdmins++;
+                            }
+                        }
                     }
                 }
 
-                // Add entry for this snapshot update
-                dataSet.addEntry(new BarEntry(index++, adminCount));
+                // Update chart data
+                entries.clear();
+                entries.add(new BarEntry(0, totalAdmins));
+                entries.add(new BarEntry(1, maleAdmins));
+                entries.add(new BarEntry(2, femaleAdmins));
+
+                dataSet.notifyDataSetChanged();
                 barData.notifyDataChanged();
+
                 adminCountChart.notifyDataSetChanged();
                 adminCountChart.invalidate();
                 adminCountChart.moveViewToX(dataSet.getEntryCount());

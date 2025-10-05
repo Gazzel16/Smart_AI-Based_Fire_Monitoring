@@ -65,7 +65,6 @@ public class OptionItemAdapter extends RecyclerView.Adapter<OptionItemAdapter.Vi
             super(itemView);
             title = itemView.findViewById(R.id.title);
             icon = itemView.findViewById(R.id.imgIcon);
-            arrow = itemView.findViewById(R.id.imageView16);
         }
     }
 }

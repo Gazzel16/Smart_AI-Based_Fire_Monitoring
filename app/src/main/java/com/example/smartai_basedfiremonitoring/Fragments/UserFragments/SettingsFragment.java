@@ -49,7 +49,7 @@ public class SettingsFragment extends Fragment {
         // 1. Prepare data
         optionList = new ArrayList<>();
         optionList.add(new OptionItemModel("Emergency", R.drawable.aid));
-        optionList.add(new OptionItemModel("Emergency Activity Log", R.drawable.aid));
+        optionList.add(new OptionItemModel("Emergency Activity Log", R.drawable.activity_log_icon));
         optionList.add(new OptionItemModel("Logout", R.drawable.logout));
 
         // 2. Setup OptionItemAdapter

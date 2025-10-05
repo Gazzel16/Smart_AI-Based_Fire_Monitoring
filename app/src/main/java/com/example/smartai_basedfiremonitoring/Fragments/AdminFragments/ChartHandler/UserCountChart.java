@@ -45,15 +45,23 @@ public class UserCountChart {
         leftAxis.setDrawAxisLine(false);
         userCountChart.getAxisRight().setEnabled(false);
 
+        ArrayList<BarEntry> entries = new ArrayList<>();
+
         // Dataset
-        BarDataSet dataSet = new BarDataSet(new ArrayList<>(), "");;
-        dataSet.setColor(Color.parseColor("#C400BCD4"));
-        dataSet.setBarBorderColor(Color.parseColor("#C400BCD4")); // outline color
+        BarDataSet dataSet = new BarDataSet(entries, "");;
+        dataSet.setColors(
+                Color.parseColor("#FFCC80"), // All Users (blue)
+                Color.parseColor("#2196F3"), // Male Users (light blue)
+                Color.parseColor("#E91E63")  // Female Users (pink)
+        );
+        dataSet.setBarBorderColor(Color.parseColor("#FFFFFFFF")); // outline color
         dataSet.setBarBorderWidth(2f); // outline thickness
         dataSet.setDrawValues(true);
 
         BarData barData = new BarData(dataSet);
+        barData.setBarWidth(0.6f);
         userCountChart.setData(barData);
+
 
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("users");
         ValueEventListener userListener = new ValueEventListener() {
@@ -63,17 +71,37 @@ public class UserCountChart {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (fragment == null || !fragment.isAdded()) return;
 
-                int userCount = 0;
+                int totalUsers  = 0;
+                int maleUsers = 0;
+                int femaleUsers = 0;
+
                 for (DataSnapshot child : snapshot.getChildren()) {
+
                     String role = child.child("role").getValue(String.class);
+                    String gender = child.child("gender").getValue(String.class);
+
                     if (role != null && role.equalsIgnoreCase("user")) {
-                        userCount++;
+                        totalUsers++;
+
+                        if (gender != null){
+                            if(gender.equalsIgnoreCase("male")){
+                                maleUsers++;
+                            }else if(gender.equalsIgnoreCase("female")){
+                                femaleUsers++;
+                            }
+                        }
                     }
                 }
 
                 // Add entry for this snapshot update
-                dataSet.addEntry(new BarEntry(index++, userCount));
+                entries.clear();
+                entries.add(new BarEntry(0, totalUsers));
+                entries.add(new BarEntry(1, maleUsers));
+                entries.add(new BarEntry(2, femaleUsers));
+
+                dataSet.notifyDataSetChanged();
                 barData.notifyDataChanged();
+
                 userCountChart.notifyDataSetChanged();
                 userCountChart.invalidate();
                 userCountChart.moveViewToX(dataSet.getEntryCount());
