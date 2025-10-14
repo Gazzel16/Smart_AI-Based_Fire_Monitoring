@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="#E4E2E2"
     android:layout_height="match_parent"
     tools:context=".Fragments.AdminFragments.AdminSignup">
 
@@ -124,11 +125,10 @@
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/circle_bg"
-        android:backgroundTint="#3F51B5"
+
         android:padding="12dp"
         android:src="@drawable/back"
-        android:tint="@color/white"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

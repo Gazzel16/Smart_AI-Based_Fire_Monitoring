@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.smartai_basedfiremonitoring.Adapter.FireReportAdapter;
@@ -41,6 +42,16 @@ public class FireUpdateFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_fire_update, container, false);
 
+
+        TextView emergencyBtn = view.findViewById(R.id.emergencyBtn);
+        emergencyBtn.setOnClickListener(v -> {
+            Fragment fragment = new EmergencyContactFragment();
+            requireActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, fragment)
+                    .addToBackStack(null)
+                    .commit();
+        });
 
         FireReportConfirmed(view);
         FireUpdateResidenceReport(view);
