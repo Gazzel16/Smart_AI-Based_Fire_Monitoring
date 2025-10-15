@@ -48,8 +48,9 @@ public class SettingsFragment extends Fragment {
 
         // 1. Prepare data
         optionList = new ArrayList<>();
+        optionList.add(new OptionItemModel("Group Members", R.drawable.team_icon));
         optionList.add(new OptionItemModel("Emergency", R.drawable.aid));
-        optionList.add(new OptionItemModel("Emergency Activity Log", R.drawable.activity_log_icon));
+        optionList.add(new OptionItemModel("Activity Log", R.drawable.activity_log_icon));
         optionList.add(new OptionItemModel("Logout", R.drawable.logout));
 
         // 2. Setup OptionItemAdapter
@@ -57,6 +58,15 @@ public class SettingsFragment extends Fragment {
             OptionItemModel clickedItem = optionList.get(position);
 
             switch (clickedItem.getTitle()){
+
+                case "Group Members":
+                    Fragment groupMemberFragment = new GroupMemberFragment();
+                    requireActivity().getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragment_container, groupMemberFragment)
+                            .addToBackStack(null)
+                            .commit();
+                    break;
 
                 case "Emergency":
                     Fragment fragment = new EmergencyFragment();
@@ -67,7 +77,7 @@ public class SettingsFragment extends Fragment {
                             .commit();
                     break;
 
-                case "Emergency Activity Log":
+                case "Activity Log":
                     Fragment fragment1 = new UserEmergencyActivityLogFragment();
                     requireActivity().getSupportFragmentManager()
                             .beginTransaction()

@@ -69,7 +69,7 @@
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout9">
+            app:layout_constraintTop_toBottomOf="@+id/view6">
 
 
             <TextView
@@ -151,6 +151,17 @@
                 />
         </LinearLayout>
 
+        <View
+            android:id="@+id/view6"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#B4B3B3"
+            android:layout_margin="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="15dp"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout9" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

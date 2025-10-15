@@ -57,7 +57,7 @@ public class ChatBotFragment extends Fragment {
     private List<ChatBotModel> chatList = new ArrayList<>();
     private OkHttpClient client = new OkHttpClient();
 
-    private static final String BASE_URL = "http://192.168.1.4:5000/generate-advisory"; // change to your backend IP
+    private static final String BASE_URL = "http://192.168.1.36:5000/generate-advisory"; // change to your backend IP
 
     private DatabaseReference sensorRef;
     private int latestTemp = 0;
@@ -126,7 +126,7 @@ public class ChatBotFragment extends Fragment {
             addMessage(message, false);
 
             // 2️⃣ Call backend with latest Firebase values
-            sendToBackend(latestTemp, latestHumidity);
+            sendToBackend(latestTemp, latestHumidity, message);
 
             // 3️⃣ Hide quick reply options
             linearLayout.setVisibility(View.GONE);
@@ -148,7 +148,7 @@ public class ChatBotFragment extends Fragment {
             addMessage(message, false);
 
             // 2️⃣ Call backend with latest Firebase values
-            sendToBackend(latestTemp, latestHumidity);
+            sendToBackend(latestTemp, latestHumidity, message);
 
             inputMessage.setText("");
             linearLayout.setVisibility(View.GONE);
@@ -179,10 +179,11 @@ public class ChatBotFragment extends Fragment {
         recyclerView.smoothScrollToPosition(chatList.size() - 1);
     }
 
-    private void sendToBackend(int temp, int humidity) {
+    private void sendToBackend(int temp, int humidity, String message) {
         MediaType JSON = MediaType.get("application/json; charset=utf-8");
         JSONObject json = new JSONObject();
         try {
+            json.put("message", message);
             json.put("temperature", temp);
             json.put("humidity", humidity);
         } catch (JSONException e) {
