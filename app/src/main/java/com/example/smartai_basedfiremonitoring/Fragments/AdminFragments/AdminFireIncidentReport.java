@@ -68,7 +68,7 @@ public class AdminFireIncidentReport extends Fragment {
                         FireReport fireReport = reportSnapshot.getValue(FireReport.class);
 
                         if (fireReport != null){
-                            reportList.add(fireReport);
+                            reportList.add(0, fireReport);
                         }
                     }
                 }
