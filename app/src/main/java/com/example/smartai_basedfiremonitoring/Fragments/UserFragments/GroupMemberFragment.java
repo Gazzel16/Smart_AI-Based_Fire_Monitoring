@@ -28,6 +28,18 @@ public class GroupMemberFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_group_member, container, false);
 
+        ImageView backBtn = view.findViewById(R.id.backBtn);
+        backBtn.setOnClickListener(v -> {
+            onDestroy();
+            Fragment fragment = new SettingsFragment();
+            requireActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, fragment) // make sure R.id.fragment_container is your FrameLayout
+                    .addToBackStack(null) // optional: adds transaction to back stack so you can navigate back
+                    .commit();
+
+        });
+
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
 

@@ -33,13 +33,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:id="@+id/backBtn"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:layout_marginStart="24dp"
         android:background="@drawable/circle_bg"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="#3F51B5"
         android:foregroundGravity="center"
+        android:tint="@color/white"
         android:padding="12dp"
         android:src="@drawable/back"
         app:layout_constraintBottom_toBottomOf="@+id/textView20"

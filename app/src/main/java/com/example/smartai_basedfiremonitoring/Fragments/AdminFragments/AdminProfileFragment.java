@@ -37,24 +37,7 @@ public class AdminProfileFragment extends Fragment {
     private RadioGroup genderGroup;
     private RadioButton female, male;
 
-    private ImageView profileImage;
-    private Uri imageUri;
-    private SharedPreferences sharedPreferences;
 
-    private final ActivityResultLauncher<String> pickImageLauncher =
-            registerForActivityResult(new ActivityResultContracts.GetContent(), uri -> {
-                if (uri != null) {
-                    imageUri = uri;
-                    profileImage.setImageURI(uri);
-                    // Persist URI permission
-                    requireContext().getContentResolver().takePersistableUriPermission(
-                            uri,
-                            Intent.FLAG_GRANT_READ_URI_PERMISSION
-                    );
-                    // Save URI locally in SharedPreferences
-                    sharedPreferences.edit().putString("profile_image", uri.toString()).apply();
-                }
-            });
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -64,20 +47,6 @@ public class AdminProfileFragment extends Fragment {
         if (bottom_navigation != null){
             bottom_navigation.setVisibility(View.GONE);
         }
-
-        profileImage = view.findViewById(R.id.profile);
-        // Initialize SharedPreferences using requireContext()
-        sharedPreferences = requireContext().getSharedPreferences("AdminPrefs", Context.MODE_PRIVATE);
-
-        // Load saved image if exists
-        String savedUri = sharedPreferences.getString("profile_image", null);
-        if (savedUri != null) {
-            profileImage.setImageURI(Uri.parse(savedUri));
-        }
-
-        profileImage.setOnClickListener(v -> {
-            pickImageLauncher.launch("image/*"); // Opens gallery
-        });
 
         Profile(view);
         return view;

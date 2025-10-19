@@ -33,9 +33,41 @@ import java.util.TimeZone;
 
 public class FlameSensor {
     private static ValueEventListener flameListener;
-    public static void flameMonitoring(TextView timeFireDetected, TextView flameDetector, Fragment fragment) {
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("sensors");
 
+    public static void flameMonitoring(TextView timeFireDetected, TextView flameDetector, Fragment fragment) {
+
+        // Flame detected time
+        DatabaseReference fireLogsRef = FirebaseDatabase.getInstance().getReference("fire_logs");
+
+        fireLogsRef.limitToLast(1).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (!fragment.isAdded()) return;
+
+                fragment.requireActivity().runOnUiThread(() -> {
+                    if (snapshot.exists()) {
+                        String latestTime = "No logs found";
+
+                        // ✅ Get the last entry's string value directly
+                        for (DataSnapshot log : snapshot.getChildren()) {
+                            latestTime = log.getValue(String.class); // No timestamp field!
+                        }
+
+                        timeFireDetected.setText(latestTime);
+                    } else {
+                        timeFireDetected.setText("Time: No Logs Available");
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("FireLogs", "Error fetching fire_logs: " + error.getMessage());
+            }
+        });
+
+        //Flame Detected
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("sensors");
         flameListener = new ValueEventListener() {
             private MediaPlayer mediaPlayer;
 
@@ -48,13 +80,10 @@ public class FlameSensor {
 
                 // Run on UI thread to ensure proper updates
                 fragment.requireActivity().runOnUiThread(() -> {
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-                    sdf.setTimeZone(TimeZone.getTimeZone("Asia/Manila"));
-                    String currentDateTime = sdf.format(new Date());
+
 
                     if (flameSensor != null && flameSensor) {
                         flameDetector.setText("Flame Detected!");
-                        timeFireDetected.setText("Time: " + currentDateTime);
 
                         Context context = fragment.getContext();
                         if (context != null) {
@@ -67,7 +96,7 @@ public class FlameSensor {
                         }
                     } else {
                         flameDetector.setText("No Flame Detected!");
-                        timeFireDetected.setText("Time: " + currentDateTime);
+
 
                         if (mediaPlayer != null && mediaPlayer.isPlaying()) {
                             mediaPlayer.stop();

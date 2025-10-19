@@ -41,10 +41,10 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == VIEW_TYPE_BOT) {
-            View view = LayoutInflater.from(context).inflate(R.layout.bot_chat_item, parent, false);
+            View view = LayoutInflater.from(context).inflate(R.layout.item_bot_chat, parent, false);
             return new BotViewHolder(view);
         } else {
-            View view = LayoutInflater.from(context).inflate(R.layout.user_chat_item, parent, false);
+            View view = LayoutInflater.from(context).inflate(R.layout.item_user_chat, parent, false);
             return new UserViewHolder(view);
         }
     }

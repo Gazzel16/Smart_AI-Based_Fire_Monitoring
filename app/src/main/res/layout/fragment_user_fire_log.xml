@@ -8,7 +8,7 @@
     android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvActivityLog"
+        android:id="@+id/rvFireLog"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="15dp"
@@ -25,7 +25,7 @@
         android:background="#122087"
         android:gravity="center"
         android:padding="25dp"
-        android:text="Activity Log"
+        android:text="Fire Log"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"

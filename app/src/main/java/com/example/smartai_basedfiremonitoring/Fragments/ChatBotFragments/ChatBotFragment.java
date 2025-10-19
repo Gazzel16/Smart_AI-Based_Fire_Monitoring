@@ -57,7 +57,7 @@ public class ChatBotFragment extends Fragment {
     private List<ChatBotModel> chatList = new ArrayList<>();
     private OkHttpClient client = new OkHttpClient();
 
-    private static final String BASE_URL = "http://192.168.1.7:5000/generate-advisory"; // change to your backend IP
+    private static final String BASE_URL = "http://192.168.1.36:5000/generate-advisory"; // change to your backend IP
 
     private DatabaseReference sensorRef;
     private int latestTemp = 0;

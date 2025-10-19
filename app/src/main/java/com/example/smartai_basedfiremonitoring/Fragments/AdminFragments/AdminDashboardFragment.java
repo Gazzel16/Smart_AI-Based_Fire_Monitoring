@@ -41,9 +41,7 @@ import java.util.List;
 
 public class AdminDashboardFragment extends Fragment {
 
-    RecyclerView recyclerView;
     AdminDashBoardAdapter adapter;
-    List<AdminDashBoardModel> adminDashboardList;
 
     BarChart userCountChart, adminCountChart, fireReportCountChart;
 

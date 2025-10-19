@@ -31,7 +31,7 @@ public class GroupMemberAdapter extends RecyclerView.Adapter<GroupMemberAdapter.
     @NonNull
     @Override
     public MessageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.about_item, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_about, parent, false);
         return new MessageViewHolder(view);
     }
 

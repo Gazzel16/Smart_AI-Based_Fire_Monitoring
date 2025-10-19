@@ -63,7 +63,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView2"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:backgroundTint="#FFF3E0"
             app:cardCornerRadius="12dp"
@@ -75,27 +75,26 @@
 
           <androidx.constraintlayout.widget.ConstraintLayout
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="wrap_content">
 
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_margin="30dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+
+                android:layout_margin="12dp"
                 android:src="@drawable/flame_logo"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/linearLayout6"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <LinearLayout
                 android:id="@+id/linearLayout6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="36dp"
                 android:orientation="vertical"
+                android:padding="15dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -112,10 +111,19 @@
                   app:layout_constraintTop_toTopOf="parent" />
 
               <TextView
+                  android:id="@+id/textView27"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="12dp"
+                  android:textColor="#FA7F57"
+                  android:textStyle="bold"
+                  android:text="Most Recent Fire Detection" />
+
+              <TextView
                   android:id="@+id/timeFireDetected"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:layout_marginTop="12dp"
+
                   android:fontFamily="@font/fir_sans_italic"
                   android:text="12/12/2025 15:30:10"
                   android:textColor="#FA7F57" />

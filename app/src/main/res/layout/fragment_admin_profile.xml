@@ -4,41 +4,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragments.UserFragments.ProfileFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="64dp"
         android:background="@drawable/edittext_background"
         android:orientation="vertical"
         android:padding="15dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/circle_outline_border"
-            android:backgroundTint="#E2E2E2"
-            android:src="@drawable/user_icon" />
-
         <EditText
             android:id="@+id/name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="4dp"
-            android:background="@android:color/transparent"
+            android:background="@drawable/edittext_background"
             android:ems="10"
             android:foregroundGravity="center"
-            android:gravity="center"
             android:hint="John Doe"
             android:inputType="text"
             android:padding="12dp"

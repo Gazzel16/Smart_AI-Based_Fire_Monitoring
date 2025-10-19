@@ -62,41 +62,30 @@ public class FireUpdateFragment extends Fragment {
 
     public void FireReportConfirmed(View view){
 
-    DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("users");
+    DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("sensors");
 
-    dbRef.addValueEventListener(new ValueEventListener() {
-        @Override
-        public void onDataChange(@NonNull DataSnapshot snapshot) {
-            hasConfirmed = false;
+        dbRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Boolean flameSensor = snapshot.child("flame").getValue(Boolean.class);
 
-            for (DataSnapshot userSnapShot : snapshot.getChildren()){
-                DataSnapshot reportsSnapshot = userSnapShot.child("reports");
-
-                for (DataSnapshot reportSnapshot: reportsSnapshot.getChildren()){
-                    Boolean confirmation = reportSnapshot.child("confirmation").getValue(Boolean.class);
-
-                    if (confirmation != null && confirmation){
-                        hasConfirmed = true;
-                        break;
+                if (!hasConfirmed){
+                    if (flameSensor != null && flameSensor){
+                        fireDetected.setText("Fire Alert Detected");
+                        description.setText("Fire detected in barangay ilaya alabang, \n\nplease inform all residence");
+                    }else {
+                        description.setText("No details until further notice");
+                        fireDetected.setText("No Fire Detected");
                     }
                 }
-                if (hasConfirmed) break;
             }
 
-            if (hasConfirmed){
-                fireDetected.setText("Fire Alert Detected");
-                description.setText("Fire detected in barangay ilaya alabang, \\nplease evacuate in the nearest evacuation center");
-            } else {
-                description.setText("No details until further notice");
-                fireDetected.setText("No Fire Detected");
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+                Log.d("FlameSensor", "Database error" + error.getMessage());
             }
-        }
-
-        @Override
-        public void onCancelled(@NonNull DatabaseError error) {
-
-        }
-    });
+        });
 
 
 

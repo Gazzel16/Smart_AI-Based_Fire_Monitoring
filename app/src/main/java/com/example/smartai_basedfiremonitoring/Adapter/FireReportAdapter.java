@@ -11,11 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smartai_basedfiremonitoring.Model.FireReport;
 import com.example.smartai_basedfiremonitoring.R;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -44,7 +39,7 @@ public class FireReportAdapter extends RecyclerView.Adapter<FireReportAdapter.Re
     @NonNull
     @Override
     public ReportViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.fire_update_item, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_fire_update, parent, false);
         return new ReportViewHolder(view);
     }
 

@@ -29,7 +29,7 @@ public class AdminDashBoardAdapter extends RecyclerView.Adapter<AdminDashBoardAd
     @NonNull
     @Override
     public FireViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.admin_dashboard_item, parent, false); // Replace with your layout name
+        View view = LayoutInflater.from(context).inflate(R.layout.item_admin_dashboard, parent, false); // Replace with your layout name
         return new FireViewHolder(view);
     }
 

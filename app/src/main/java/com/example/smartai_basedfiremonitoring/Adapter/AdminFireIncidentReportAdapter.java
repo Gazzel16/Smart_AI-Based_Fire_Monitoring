@@ -16,8 +16,6 @@ import com.example.smartai_basedfiremonitoring.Adapter.AdminFireIncidentReportHa
 import com.example.smartai_basedfiremonitoring.Adapter.AdminFireIncidentReportHandler.AdminDeclineFalseReport;
 import com.example.smartai_basedfiremonitoring.Model.FireReport;
 import com.example.smartai_basedfiremonitoring.R;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
@@ -34,7 +32,7 @@ public class AdminFireIncidentReportAdapter extends RecyclerView.Adapter<AdminFi
     @NonNull
     @Override
     public FireReportViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.fire_incident_admin_item, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_fire_incident_admin, parent, false);
         return new FireReportViewHolder(view);
     }
 

@@ -51,6 +51,7 @@ public class SettingsFragment extends Fragment {
         optionList.add(new OptionItemModel("Group Members", R.drawable.team_icon));
         optionList.add(new OptionItemModel("Emergency", R.drawable.aid));
         optionList.add(new OptionItemModel("Activity Log", R.drawable.activity_log_icon));
+        optionList.add(new OptionItemModel("Fire log", R.drawable.flame_incident_report_icon));
         optionList.add(new OptionItemModel("Logout", R.drawable.logout));
 
         // 2. Setup OptionItemAdapter
@@ -82,6 +83,15 @@ public class SettingsFragment extends Fragment {
                     requireActivity().getSupportFragmentManager()
                             .beginTransaction()
                             .replace(R.id.fragment_container, fragment1)
+                            .addToBackStack(null)
+                            .commit();
+                    break;
+
+                case "Fire log":
+                    Fragment fireLog = new UserFireLogFragment();
+                    requireActivity().getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragment_container, fireLog)
                             .addToBackStack(null)
                             .commit();
                     break;
