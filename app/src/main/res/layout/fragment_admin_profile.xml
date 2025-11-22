@@ -83,7 +83,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
-            android:backgroundTint="#212F76"
+            android:backgroundTint="#293DAB"
             android:text="Save" />
 
 
@@ -93,7 +93,7 @@
         android:id="@+id/textView4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#343F7E"
+        android:background="#293DAB"
         android:fontFamily="@font/quick_sand"
         android:gravity="center"
         android:padding="25dp"

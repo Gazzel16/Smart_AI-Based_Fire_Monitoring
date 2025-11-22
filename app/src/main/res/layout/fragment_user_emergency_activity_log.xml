@@ -22,7 +22,7 @@
         android:id="@+id/textView20"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#122087"
+        android:background="#293DAB"
         android:gravity="center"
         android:padding="25dp"
         android:text="Activity Log"

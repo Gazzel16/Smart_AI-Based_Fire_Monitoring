@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#122087"
+    android:background="#293DAB"
     tools:context=".Fragments.ChatBotFragments.ChatBotFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout

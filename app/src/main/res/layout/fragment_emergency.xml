@@ -59,7 +59,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Press the button to notify the admin \nin Brgy. Alabang Ilaya"
+                    android:text="Press the button to post a report to admin"
                     android:textSize="15sp" />
             </LinearLayout>
 
@@ -95,7 +95,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
-                    android:text="Press this button only in emergencies. If the sensor misses an incident, use it to alert the admin immediately for quick action. Do not use it as a prank."
+                    android:text="Use this button to send a report and wait for the admin’s confirmation. Please use it only for emergencies and avoid prank reports."
                     android:textSize="15sp" />
 
             </LinearLayout>

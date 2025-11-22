@@ -22,7 +22,7 @@
         android:id="@+id/textView20"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:background="#001476"
+        android:background="#293DAB"
         android:gravity="center"
         android:padding="15dp"
         android:text="Group Members"

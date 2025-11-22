@@ -15,7 +15,7 @@
             android:id="@+id/linearLayout5"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#041CB3"
+            android:background="#293DAB"
             android:gravity="center"
             android:orientation="vertical"
             android:padding="12dp"
@@ -45,163 +45,23 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/linearLayout17"
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:padding="4dp"
+            android:layout_margin="12dp"
+            android:background="@drawable/round_corner_no_padding"
+            android:backgroundTint="#293DAB"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="6dp"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="Emergency Hotline:"
-                    android:textColor="#F44336"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    android:fontFamily="sans-serif-condensed-medium"
-                    android:text="137-175"
-                    android:textColor="#DC1304"
-                    android:textSize="30sp"
-                    android:textStyle="bold" />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="6dp"
-                android:layout_weight="1"
-                android:background="@drawable/outline_border_round"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="2dp"
-                        android:fontFamily="sans-serif-medium"
-                        android:text="Landline:"
-                        android:textColor="@color/black"
-                        android:textSize="10sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="4dp"
-                        android:drawableStart="@drawable/pldt_icon"
-                        android:drawablePadding="6dp"
-                        android:fontFamily="sans-serif-medium"
-                        android:text="8-373-51-65"
-                        android:textColor="#B1AFAF"
-                        android:textSize="8sp"
-                        android:textStyle="bold" />
-
-                    <View
-                        android:id="@+id/view5"
-                        android:layout_width="match_parent"
-                        android:layout_height="10dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="2dp"
-                        android:fontFamily="sans-serif-medium"
-                        android:text="Hotline Smart:"
-                        android:textColor="@color/black"
-                        android:textSize="10sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="4dp"
-                        android:drawableStart="@drawable/smart_icon"
-                        android:drawablePadding="4dp"
-                        android:fontFamily="sans-serif-medium"
-                        android:text="0921-542-7123"
-                        android:textColor="#B1AFAF"
-                        android:textSize="8sp"
-                        android:textStyle="bold" />
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="8dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="2dp"
-                        android:fontFamily="sans-serif-medium"
-                        android:text="Hotline Globe:"
-                        android:textColor="@color/black"
-                        android:textSize="10sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="4dp"
-                        android:drawableStart="@drawable/globe_icon"
-                        android:drawablePadding="4dp"
-                        android:fontFamily="sans-serif-medium"
-                        android:text="0927-257-9322"
-                        android:textColor="#B1AFAF"
-                        android:textSize="8sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:background="@drawable/round_corner_no_padding"
-            android:backgroundTint="#041CB3"
-            android:layout_margin="12dp"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout17">
-
-            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="8dp"
                 android:orientation="horizontal"
                 android:padding="12dp"
-                android:layout_margin="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/view4">
@@ -215,26 +75,159 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                    <include
-                        android:id="@+id/brgy_tunasan"
-                        layout="@layout/item_barangay_hotline" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="8dp"
+                        android:drawableStart="@android:drawable/ic_menu_call"
+                        android:gravity="center_vertical"
+                        android:padding="8dp"
+                        android:text="BARANGAY BAYANAN"
+                        android:textColor="#FFC107"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
 
-                    <include
-                        android:id="@+id/brgy_putatan"
-                        layout="@layout/item_barangay_hotline" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="16dp"
+                        android:paddingTop="4dp"
+                        android:text="0960-863-3174"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
 
-                    <include
-                        android:id="@+id/brgy_poblacion"
-                        layout="@layout/item_barangay_hotline" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="16dp"
+                        android:text="0927-130-2027"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
 
-                    <include
-                        android:id="@+id/brgy_bayanihan"
-                        layout="@layout/item_barangay_hotline" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="16dp"
+                        android:text="0956-403-5616"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
 
-                    <include
-                        android:id="@+id/brgy_alabang"
-                        layout="@layout/item_barangay_hotline" />
 
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:drawablePadding="8dp"
+                        android:drawableStart="@android:drawable/ic_menu_call"
+                        android:gravity="center_vertical"
+                        android:padding="8dp"
+                        android:text="BARANGAY PUTATAN"
+                        android:textColor="#FFC107"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="16dp"
+                        android:paddingTop="4dp"
+                        android:text="8-461-52-60"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="16dp"
+                        android:text="8-660-01-44"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:drawablePadding="8dp"
+                        android:drawableStart="@android:drawable/ic_menu_call"
+                        android:gravity="center_vertical"
+                        android:padding="8dp"
+                        android:text="BARANGAY TUNASAN"
+                        android:textColor="#FFC107"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="16dp"
+                        android:paddingTop="4dp"
+                        android:text="0917-559-0074"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="16dp"
+                        android:text="0939-904-4769"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="16dp"
+                        android:paddingStart="16dp"
+                        android:text="0910-968-1064"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:drawablePadding="8dp"
+                        android:drawableStart="@android:drawable/ic_menu_call"
+                        android:gravity="center_vertical"
+                        android:padding="8dp"
+                        android:text="BARANGAY AYALA ALABANG"
+                        android:textColor="#FFC107"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="16dp"
+                        android:paddingTop="4dp"
+                        android:text="8-808-4053"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="16dp"
+                        android:text="8-807-2472"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="16dp"
+                        android:text="0954-188-2730"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="16dp"
+                        android:text="0917-111-2555"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -245,21 +238,161 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                    <include
-                        android:id="@+id/brgy_ayalalab"
-                        layout="@layout/item_barangay_hotline" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="8dp"
+                        android:drawableStart="@android:drawable/ic_menu_call"
+                        android:gravity="center_vertical"
+                        android:padding="8dp"
+                        android:text="BARANGAY POBLACION"
+                        android:textColor="#FFC107"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
 
-                    <include
-                        android:id="@+id/brgy_cupang"
-                        layout="@layout/item_barangay_hotline" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="16dp"
+                        android:paddingTop="4dp"
+                        android:text="0960-5880-700"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
 
-                    <include
-                        android:id="@+id/brgy_buli"
-                        layout="@layout/item_barangay_hotline" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="16dp"
+                        android:text="0951-585-3488"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
 
-                    <include
-                        android:id="@+id/brgy_sucat"
-                        layout="@layout/item_barangay_hotline" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="16dp"
+                        android:text="0905-221-0731"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:drawablePadding="8dp"
+                        android:drawableStart="@android:drawable/ic_menu_call"
+                        android:gravity="center_vertical"
+                        android:padding="8dp"
+                        android:text="BARANGAY ALABANG"
+                        android:textColor="#FFC107"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="16dp"
+                        android:paddingTop="4dp"
+                        android:text="0947-388-9040"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="16dp"
+                        android:text="0995-453-9470"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:drawablePadding="8dp"
+                        android:drawableStart="@android:drawable/ic_menu_call"
+                        android:gravity="center_vertical"
+                        android:padding="8dp"
+                        android:text="BARANGAY CUPANG"
+                        android:textColor="#FFC107"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="16dp"
+                        android:paddingTop="4dp"
+                        android:text="0963-470-1002"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="16dp"
+                        android:text="0994-384-8938"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:drawablePadding="8dp"
+                        android:drawableStart="@android:drawable/ic_menu_call"
+                        android:gravity="center_vertical"
+                        android:padding="8dp"
+                        android:text="BARANGAY BULI"
+                        android:textColor="#FFC107"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="16dp"
+                        android:paddingTop="4dp"
+                        android:text="0995-211-2601"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:drawablePadding="8dp"
+                        android:drawableStart="@android:drawable/ic_menu_call"
+                        android:gravity="center_vertical"
+                        android:padding="8dp"
+                        android:text="BARANGAY SUCAT"
+                        android:textColor="#FFC107"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="16dp"
+                        android:paddingTop="4dp"
+                        android:text="0949-835-5484"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="16dp"
+                        android:paddingStart="16dp"
+                        android:text="8-927-8228"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 
@@ -269,9 +402,9 @@
                 android:id="@+id/view4"
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
-                android:background="#FFC107"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
+                android:background="#FFC107"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
