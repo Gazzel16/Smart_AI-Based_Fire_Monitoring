@@ -32,7 +32,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class AdminProfileFragment extends Fragment {
 
-    private EditText name, email, password;
+    private EditText name, email, password, age;
     private Button saveBtn;
     private RadioGroup genderGroup;
     private RadioButton female, male;
@@ -55,6 +55,7 @@ public class AdminProfileFragment extends Fragment {
     public void Profile(View view){
         name = view.findViewById(R.id.name);
         email = view.findViewById(R.id.email);
+        age = view.findViewById(R.id.age);
         password = view.findViewById(R.id.password);
         saveBtn = view.findViewById(R.id.saveBtn);
         female = view.findViewById(R.id.female);
@@ -103,9 +104,16 @@ public class AdminProfileFragment extends Fragment {
 
         String newName = name.getText().toString().trim();
         String newEmail = email.getText().toString().trim();
+        String newAgeStr = age.getText().toString().trim();
         String newPassword = password.getText().toString().trim();
 
         String gender = "";
+
+        int age = Integer.parseInt(newAgeStr);
+        if (age <= 20){
+            Toast.makeText(requireContext(), "Age must be 20 bove", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         if (male.isChecked()){
             gender = "male";
@@ -124,7 +132,7 @@ public class AdminProfileFragment extends Fragment {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         String userId = currentUser.getUid();
-        User updatedUser = new User(userId, newName, newEmail, gender, "admin");
+        User updatedUser = new User(userId, newName, newEmail, newAgeStr, gender, "admin");
 
         databaseReference.child(userId).setValue(updatedUser)
                 .addOnSuccessListener(aVoid -> {
