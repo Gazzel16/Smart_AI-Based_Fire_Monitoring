@@ -5,6 +5,7 @@ public class User {
     public String username;
 
     public String email;
+    public String age;
 
     public String gender;
     public String role;
@@ -13,10 +14,11 @@ public class User {
 
     }
 
-    public User(String id,String username, String email,String gender, String role){
+    public User(String id,String username, String email, String age, String gender, String role){
         this.id = id;
         this.username = username;
         this.email = email;
+        this.age = age;
         this.gender = gender;
         this.role = role;
     }
@@ -44,6 +46,13 @@ public class User {
     }
     public void setEmail(String email){
         this.email = email;
+    }
+
+    public String getAge(){
+        return age;
+    }
+    public void setAge(String age){
+        this.age = age;
     }
 
     public String getRole() { return role; }

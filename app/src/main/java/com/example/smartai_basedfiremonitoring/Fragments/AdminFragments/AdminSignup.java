@@ -25,7 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class AdminSignup extends Fragment {
 
-    EditText usernameEditText, emailEditText, passwordEditText;
+    EditText usernameEditText, emailEditText, passwordEditText, ageEditText;
     Button registerBtn;
     ImageView backBtn;
     DatabaseReference databaseReference;
@@ -41,6 +41,7 @@ public class AdminSignup extends Fragment {
 
         usernameEditText = view.findViewById(R.id.name);
         emailEditText = view.findViewById(R.id.email);
+        ageEditText = view.findViewById(R.id.age);
         passwordEditText = view.findViewById(R.id.password);
         registerBtn = view.findViewById(R.id.register);
         backBtn = view.findViewById(R.id.backBtn);
@@ -71,9 +72,16 @@ public class AdminSignup extends Fragment {
     public void registerAdmin(){
         String username = usernameEditText.getText().toString().trim();
         String email = emailEditText.getText().toString().trim();
+        String ageStr = ageEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
 
         final String gender;
+
+        int age = Integer.parseInt(ageStr);
+        if (age <= 20){
+            Toast.makeText(requireContext(), "Age must be 20 bove", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         if (male.isChecked()){
             gender = "male";
@@ -101,7 +109,7 @@ public class AdminSignup extends Fragment {
                     if (task.isSuccessful()){
 
                         String uId = mAuth.getCurrentUser().getUid();
-                        User user = new User(uId, username, email, gender, "admin");
+                        User user = new User(uId, username, email, ageStr, gender, "admin");
 
                         databaseReference.child(uId).setValue(user)
                                 .addOnCompleteListener(dbTask ->{

@@ -72,6 +72,19 @@
             android:textColorHint="@color/black" />
 
         <EditText
+            android:id="@+id/age"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:background="@drawable/edittext_background"
+            android:backgroundTint="#F8D7DF"
+            android:ems="10"
+            android:hint="Age"
+            android:inputType="number"
+            android:padding="12dp"
+            android:textColorHint="@color/black" />
+
+        <EditText
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

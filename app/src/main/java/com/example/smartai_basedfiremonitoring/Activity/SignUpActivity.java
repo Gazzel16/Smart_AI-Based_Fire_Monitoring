@@ -23,7 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    EditText usernameEditText, emailEditText, passwordEditText;
+    EditText usernameEditText, emailEditText, passwordEditText, ageEditText;
     Button signUpBtn;
     DatabaseReference databaseReference;
     FirebaseAuth mAuth;
@@ -38,6 +38,7 @@ public class SignUpActivity extends AppCompatActivity {
         usernameEditText = findViewById(R.id.username);
         emailEditText = findViewById(R.id.email);
         passwordEditText = findViewById(R.id.password);
+        ageEditText = findViewById(R.id.age);
 
         signUpBtn = findViewById(R.id.signUpBtn);
 
@@ -54,8 +55,15 @@ public class SignUpActivity extends AppCompatActivity {
     private void registerUser() {
         String username = usernameEditText.getText().toString().trim();
         String email = emailEditText.getText().toString().trim();
+        String ageStr = ageEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
         final String gender;
+
+        int age = Integer.parseInt(ageStr);
+        if (age <= 20){
+            Toast.makeText(this, "Age must be 20 bove", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         if (male.isChecked()){
             gender = "male";
@@ -83,7 +91,7 @@ public class SignUpActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         // Save extra info in Realtime Database
                         String uid = mAuth.getCurrentUser().getUid();
-                        User user = new User(uid, username, email, gender,"user");
+                        User user = new User(uid, username, email, ageStr, gender,"user");
 
                         databaseReference.child(uid).setValue(user)
                                 .addOnCompleteListener(dbTask -> {
