@@ -37,7 +37,7 @@
                 resetUpdate.put("flame",false);
 
                 dbFireDetected.updateChildren(resetUpdate);
-            }, 50000);
+            }, 15000);
         }
 
     }
