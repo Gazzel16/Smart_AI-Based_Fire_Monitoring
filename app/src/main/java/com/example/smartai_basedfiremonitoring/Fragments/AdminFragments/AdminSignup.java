@@ -125,7 +125,17 @@ public class AdminSignup extends Fragment {
                                         Toast.makeText(getContext(), "Failed to save user data", Toast.LENGTH_SHORT).show();
                                     }
                                 });
+                        } else {
+                        // Email already in use or other auth error
+                        if (task.getException() != null) {
+                            String error = task.getException().getMessage();
+                            if (error.contains("email address is already in use")) {
+                                Toast.makeText(getContext(), "Email is already taken", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getContext(), error, Toast.LENGTH_SHORT).show();
+                            }
                         }
+                    }
 
                 });
 

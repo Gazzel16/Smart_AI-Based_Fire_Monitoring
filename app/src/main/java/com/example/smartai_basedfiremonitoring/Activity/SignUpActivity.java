@@ -103,8 +103,16 @@ public class SignUpActivity extends AppCompatActivity {
                                         Toast.makeText(SignUpActivity.this, "Failed to save user data", Toast.LENGTH_SHORT).show();
                                     }
                                 });
-                    } else {
-                        Toast.makeText(SignUpActivity.this, "Registration failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }  else {
+                        // Handle errors
+                        if (task.getException() != null) {
+                            String error = task.getException().getMessage();
+                            if (error.contains("email address is already in use")) {
+                                Toast.makeText(SignUpActivity.this, "Email is already taken", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(SignUpActivity.this, "Registration failed: " + error, Toast.LENGTH_SHORT).show();
+                            }
+                        }
                     }
                 });
     }

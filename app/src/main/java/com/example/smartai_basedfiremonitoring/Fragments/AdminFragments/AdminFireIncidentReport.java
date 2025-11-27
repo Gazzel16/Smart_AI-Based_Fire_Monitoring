@@ -23,9 +23,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class AdminFireIncidentReport extends Fragment {
@@ -68,10 +71,38 @@ public class AdminFireIncidentReport extends Fragment {
                         FireReport fireReport = reportSnapshot.getValue(FireReport.class);
 
                         if (fireReport != null){
-                            reportList.add(0, fireReport);
+                            reportList.add(fireReport);
                         }
                     }
                 }
+
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+
+                reportList.clear();
+
+                for (DataSnapshot userSnapshot : snapshot.getChildren()) {
+                    DataSnapshot reportsSnapshot = userSnapshot.child("reports");
+
+                    for (DataSnapshot reportSnapshot : reportsSnapshot.getChildren()) {
+                        FireReport fireReport = reportSnapshot.getValue(FireReport.class);
+
+                        if (fireReport != null && fireReport.getTimeReported() != null) {
+                            reportList.add(fireReport);
+                        }
+                    }
+                }
+
+                reportList.sort((r1, r2) -> {
+                    try {
+                        Date d1 = sdf.parse(r1.getTimeReported());
+                        Date d2 = sdf.parse(r2.getTimeReported());
+                        return d2.compareTo(d1); // newest on top
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        return 0;
+                    }
+                });
+
                 if (adapter != null){
                     adapter.notifyDataSetChanged();
                 }

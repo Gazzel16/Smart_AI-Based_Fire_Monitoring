@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.example.smartai_basedfiremonitoring.Adapter.FireReportAdapter;
 import com.example.smartai_basedfiremonitoring.Adapter.ViewUserAdapter;
@@ -30,9 +31,11 @@ import java.util.List;
 public class FireReportListFragment extends Fragment {
 
 
+    EditText searchUser;
     RecyclerView recyclerView;
     FireReportAdapter adapter;
     List<FireReport> fireReportList;
+    List<FireReport> filteredList;
 
     DatabaseReference dbRef;
 
@@ -49,44 +52,93 @@ public class FireReportListFragment extends Fragment {
 
         dbRef = FirebaseDatabase.getInstance().getReference("users");
         recyclerView = view.findViewById(R.id.recyclerView);
+        searchUser = view.findViewById(R.id.searchUser);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
         fireReportList = new ArrayList<>();
-        adapter = new FireReportAdapter(getContext(), fireReportList);
+        filteredList = new ArrayList<>();
+
+        adapter = new FireReportAdapter(getContext(), filteredList);
         recyclerView.setAdapter(adapter);
 
+        loadFireReports();
+        setupSearch();
+
+        return view;
+    }
+
+    private void loadFireReports() {
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 fireReportList.clear();
 
-                for (DataSnapshot dataSnapshotUsers : snapshot.getChildren()){
+                for (DataSnapshot dataSnapshotUsers : snapshot.getChildren()) {
                     DataSnapshot reportsSnapshot = dataSnapshotUsers.child("reports");
 
-                    for (DataSnapshot reportSnapshot :reportsSnapshot.getChildren()){
+                    for (DataSnapshot reportSnapshot : reportsSnapshot.getChildren()) {
                         FireReport fireReport = reportSnapshot.getValue(FireReport.class);
 
-                        if (fireReport != null){
+                        if (fireReport != null) {
                             fireReportList.add(fireReport);
                         }
                     }
                 }
-                if (adapter != null){
-                    adapter.notifyDataSetChanged();
-                }
+
+                // Update filtered list
+                filteredList.clear();
+                filteredList.addAll(fireReportList);
+                adapter.notifyDataSetChanged();
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
+            public void onCancelled(@NonNull DatabaseError error) {}
         });
-
-
-
-
-        return view;
     }
+
+    private void setupSearch() {
+        searchUser.addTextChangedListener(new android.text.TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                filterReports(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(android.text.Editable s) {}
+        });
+    }
+
+    private void filterReports(String text) {
+        filteredList.clear();
+
+        for (FireReport report : fireReportList) {
+            if (
+                    (report.getReporterName() != null &&
+                            report.getReporterName().toLowerCase().contains(text.toLowerCase())) ||
+
+                            (report.getDescription() != null &&
+                                    report.getDescription().toLowerCase().contains(text.toLowerCase())) ||
+
+                            (report.getTimeReported() != null &&
+                                    report.getTimeReported().toLowerCase().contains(text.toLowerCase())) ||
+
+                            (report.getReportId() != null &&
+                                    report.getReportId().toLowerCase().contains(text.toLowerCase())) ||
+
+                            (report.getUserId() != null &&
+                                    report.getUserId().toLowerCase().contains(text.toLowerCase()))
+            ) {
+                filteredList.add(report);
+            }
+        }
+
+        adapter.notifyDataSetChanged();
+    }
+
 
     @Override
     public void onResume() {

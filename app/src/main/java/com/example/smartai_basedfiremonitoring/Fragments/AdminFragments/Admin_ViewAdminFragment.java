@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,7 +30,9 @@ public class Admin_ViewAdminFragment extends Fragment {
     RecyclerView recyclerView;
     ViewUserAdapter adapter;
     List<User> userList;
+    List<User> filteredList;
 
+    EditText searchUser;
     DatabaseReference dbRef;
 
     public Admin_ViewAdminFragment() {
@@ -44,13 +47,20 @@ public class Admin_ViewAdminFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_admin__view_admin, container, false);
 
         dbRef = FirebaseDatabase.getInstance().getReference("users");
+
         recyclerView = view.findViewById(R.id.recyclerView);
+        searchUser = view.findViewById(R.id.searchUser);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
         userList = new ArrayList<>();
-        adapter = new ViewUserAdapter(userList);
+        filteredList = new ArrayList<>();
+
+        adapter = new ViewUserAdapter(filteredList);
         recyclerView.setAdapter(adapter);
+
         userListView();
+        setupSearch();
 
         return view;
     }
@@ -68,6 +78,9 @@ public class Admin_ViewAdminFragment extends Fragment {
                         userList.add(user);
                     }
                 }
+
+                filteredList.clear();
+                filteredList.addAll(userList);
                 adapter.notifyDataSetChanged();
             }
 
@@ -76,6 +89,34 @@ public class Admin_ViewAdminFragment extends Fragment {
 
             }
         });
+    }
+
+    private void setupSearch() {
+        searchUser.addTextChangedListener(new android.text.TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                filter(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(android.text.Editable s) {}
+        });
+    }
+
+
+    private void filter(String text) {
+        filteredList.clear();
+
+        for (User user : userList) {
+            if (user.getUsername().toLowerCase().contains(text.toLowerCase())) {
+                filteredList.add(user);
+            }
+        }
+
+        adapter.notifyDataSetChanged();
     }
 
 

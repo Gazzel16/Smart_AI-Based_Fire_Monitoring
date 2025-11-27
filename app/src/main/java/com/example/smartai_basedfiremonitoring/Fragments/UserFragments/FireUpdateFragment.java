@@ -152,6 +152,20 @@ public class FireUpdateFragment extends Fragment {
                         }
                     }
                 }
+
+                // Sort newest first
+                java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss", java.util.Locale.getDefault());
+                reports.sort((r1, r2) -> {
+                    try {
+                        java.util.Date d1 = sdf.parse(r1.getTimeReported());
+                        java.util.Date d2 = sdf.parse(r2.getTimeReported());
+                        return d2.compareTo(d1); // newest on top
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        return 0;
+                    }
+                });
+
                 if (adapter != null){
                     adapter.notifyDataSetChanged();
                 }
