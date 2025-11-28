@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,6 +24,7 @@ public class ESP32_WIFI_CredentialsFragment extends Fragment {
     private EditText wifiSSID, wifiPass;
     private Button saveBtn;
     ImageView backBtn;
+    private TextView connectedAt;
     private DatabaseReference dbRef;
 
     @Override
@@ -34,8 +36,21 @@ public class ESP32_WIFI_CredentialsFragment extends Fragment {
         wifiPass = view.findViewById(R.id.wifiPass);
         saveBtn = view.findViewById(R.id.saveBtn);
         backBtn = view.findViewById(R.id.backBtn);
+        connectedAt = view.findViewById(R.id.connectedAt);
         // 🔥 Firebase reference to your "wifi" node
         dbRef = FirebaseDatabase.getInstance().getReference("wifi");
+        dbRef.child("ssid").get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                String ssid = String.valueOf(task.getResult().getValue());
+                if (!TextUtils.isEmpty(ssid)) {
+                    connectedAt.setText("Connected At: " + ssid);
+                } else {
+                    connectedAt.setText("Connected At: N/A");
+                }
+            } else {
+                connectedAt.setText("Connected At: Error");
+            }
+        });
 
         saveBtn.setOnClickListener(v -> saveCredentials());
 
@@ -65,6 +80,8 @@ public class ESP32_WIFI_CredentialsFragment extends Fragment {
         dbRef.child("ssid").setValue(ssid);
         dbRef.child("password").setValue(pass).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
+                wifiSSID.setText("");
+                wifiPass.setText("");
                 Toast.makeText(getContext(), "WiFi Credentials Updated!", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(getContext(), "Failed to update!", Toast.LENGTH_SHORT).show();
