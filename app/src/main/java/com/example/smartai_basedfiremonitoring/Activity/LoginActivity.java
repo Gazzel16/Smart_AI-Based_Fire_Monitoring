@@ -107,8 +107,10 @@ public class LoginActivity extends AppCompatActivity {
                                             }
 
                                         }
+
                                     });
                                 });
+                        logInBtn.setText("Logging In....");
                     } else {
                         // Login failed
                         Toast.makeText(LoginActivity.this,

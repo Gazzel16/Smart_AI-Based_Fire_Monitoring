@@ -65,15 +65,12 @@ public class AdminFireIncidentReportAdapter extends RecyclerView.Adapter<AdminFi
     }
 
     public void reportConfirmation(FireReportViewHolder holder, FireReport report) {
-        if (report.isConfirmation()) {
 
+        if (report.isConfirmation() || report.isFalseReport()) {
             holder.cardViewFireReport.setVisibility(View.GONE);
-
-        } else if (report.isFalseReport()) {
-
-            holder.cardViewFireReport.setVisibility(View.GONE);
-
         } else {
+            holder.cardViewFireReport.setVisibility(View.VISIBLE);
+
             holder.confirmation.setText("Not Confirmed");
             holder.confirmation.setTextColor(context.getResources().getColor(android.R.color.holo_blue_dark));
 

@@ -110,7 +110,7 @@
             android:background="#A60238"
             android:padding="8dp"
 
-            android:text="Lorem ipsum dolor sit amet, \nconsectetur adipiscing elit. \nSed do eiusmod tempor incididunt"
+            android:text="Smart fire monitoring for Barangay \nIlaya Alabang residents."
             android:textColor="@color/white"
             app:layout_constraintTop_toBottomOf="@+id/textView13"
             tools:layout_editor_absoluteX="58dp" />
