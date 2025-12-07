@@ -45,7 +45,6 @@
       android:layout_width="0dp"
       android:layout_height="0dp"
       android:padding="7dp"
-
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
@@ -55,6 +54,39 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
+
+      <LinearLayout
+          android:id="@+id/isUnderMaintenance"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:padding="8dp"
+          android:background="@drawable/edittext_background"
+          android:orientation="vertical"
+          android:layout_margin="8dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="italic"
+            android:fontFamily="sans-serif"
+            android:textSize="18sp"
+            android:layout_margin="4dp"
+            android:text="Maintenance Notice:" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="italic"
+            android:fontFamily="sans-serif"
+            android:background="@drawable/round_corner_no_padding"
+            android:padding="8dp"
+            android:textColor="@color/white"
+            android:backgroundTint="#009688"
+            android:textSize="18sp"
+            android:layout_margin="4dp"
+            android:layout_marginTop="3dp"
+            android:text="We're performing maintenance on the sensors. Services will return to normal soon." />
+      </LinearLayout>
 
       <androidx.constraintlayout.widget.ConstraintLayout
           android:layout_width="match_parent"
@@ -71,7 +103,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+            app:layout_constraintTop_toTopOf="parent">
 
           <androidx.constraintlayout.widget.ConstraintLayout
               android:layout_width="match_parent"
@@ -115,9 +147,9 @@
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:layout_marginTop="12dp"
+                  android:text="Most Recent Fire Detection"
                   android:textColor="#FA7F57"
-                  android:textStyle="bold"
-                  android:text="Most Recent Fire Detection" />
+                  android:textStyle="bold" />
 
               <TextView
                   android:id="@+id/timeFireDetected"
@@ -184,7 +216,7 @@
                     android:src="@drawable/temp_logo"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toEndOf="@+id/linearLayout3"
+
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.0" />
 
@@ -198,10 +230,11 @@
                     android:padding="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout17" />
 
                 <LinearLayout
-                    android:id="@+id/linearLayout3"
+
+                    android:id="@+id/linearLayout17"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -211,7 +244,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                   <TextView
-                      android:id="@+id/textView7"
+
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:fontFamily="@font/fir_sans_italic"
@@ -221,7 +254,7 @@
                       android:textStyle="bold" />
 
                   <TextView
-                      android:id="@+id/textView8"
+
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:fontFamily="@font/fir_sans_italic"
@@ -281,19 +314,20 @@
 
 
                 <ImageView
-                    android:id="@+id/imageView5"
+
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_margin="12dp"
                     android:src="@drawable/humid_logo"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toEndOf="@+id/linearLayout3"
+
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.0" />
 
                 <LinearLayout
-                    android:id="@+id/linearLayout3"
+
+                    android:id="@+id/linearLayout19"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -303,7 +337,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                   <TextView
-                      android:id="@+id/textView7"
+
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:fontFamily="@font/fir_sans_italic"
@@ -313,7 +347,7 @@
                       android:textStyle="bold" />
 
                   <TextView
-                      android:id="@+id/textView8"
+
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:fontFamily="@font/fir_sans_italic"
@@ -332,7 +366,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout19" />
 
                 <LinearLayout
                     android:layout_width="match_parent"

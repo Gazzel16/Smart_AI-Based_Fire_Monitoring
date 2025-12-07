@@ -5,6 +5,7 @@
     import android.view.LayoutInflater;
     import android.view.View;
     import android.view.ViewGroup;
+    import android.widget.LinearLayout;
     import android.widget.TextView;
     import android.widget.Toast;
 
@@ -26,6 +27,8 @@
     import com.github.mikephil.charting.data.LineDataSet;
     import com.google.firebase.auth.FirebaseAuth;
     import com.google.firebase.auth.FirebaseUser;
+    import com.google.firebase.database.DataSnapshot;
+    import com.google.firebase.database.DatabaseError;
     import com.google.firebase.database.DatabaseReference;
     import com.google.firebase.database.FirebaseDatabase;
     import com.google.firebase.database.ValueEventListener;
@@ -38,6 +41,8 @@
                 tempStatus, humidAnalogOutput, humidStatus, smokeOutput, smokeStatus, username;
 
         LineChart tempLineChart, humidLineChart, smokeLineChart;
+
+        LinearLayout isUnderMaintenance;
         private static ValueEventListener tempListener;
         @Nullable
         @Override
@@ -67,12 +72,34 @@
             HumidSensor.humidMonitoring(humidAnalogOutput, humidStatus, humidLineChart, this);
             SmokeSensor.smokeSensor(smokeOutput, smokeStatus, smokeLineChart, this);
 
-//            UserNameHandler(view);
+            isUnderMaintenance = view.findViewById(R.id.isUnderMaintenance);
+            DatabaseReference maintenanceRef =
+                    FirebaseDatabase.getInstance().getReference("MaintenanceLogs")
+                            .child("isMaintenance")
+                            .child("maintenance");
+
+            maintenanceRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    Boolean state = snapshot.getValue(Boolean.class);
+
+                    if (state != null && state) {
+                        // TRUE → show box
+                        isUnderMaintenance.setVisibility(View.VISIBLE);
+                    } else {
+                        // FALSE → hide the box
+                        isUnderMaintenance.setVisibility(View.GONE);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
             return view;
         }
-
-
-
 
 
         @Override
@@ -85,27 +112,5 @@
 
         }
 
-//        public void UserNameHandler(View view){
-//
-//            username = view.findViewById(R.id.username);
-//            FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-//            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users");
-//
-//            if (currentUser != null){
-//                String userId = currentUser.getUid();
-//                databaseReference.child(userId).get().addOnSuccessListener(snapShot -> {
-//                    User user = snapShot.getValue(User.class);
-//
-//                    if (user != null){
-//                        username.setText("Welcome! " + user.getUsername());
-//                    }
-//
-//                }).addOnFailureListener(e -> {
-//                    Toast.makeText(getContext(), "Failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-//                });
-//
-//            }
-//
-//        }
 
     }

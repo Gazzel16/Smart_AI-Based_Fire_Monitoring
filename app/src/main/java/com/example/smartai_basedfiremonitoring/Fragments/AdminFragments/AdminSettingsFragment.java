@@ -50,6 +50,9 @@ private RecyclerView rvSetting;
         optionList = new ArrayList<>();
         optionList.add(new OptionItemModel("ESP32 Access", R.drawable.esp32_icon));
         optionList.add(new OptionItemModel("Create Admin", R.drawable.user_icon));
+        optionList.add(new OptionItemModel("Sensors Maintenance", R.drawable.maintenance_ic));
+        optionList.add(new OptionItemModel("Maintenance Logs", R.drawable.maintenance_logs_ic));
+
         optionList.add(new OptionItemModel("Logout", R.drawable.logout));
 
         // 2. Setup OptionItemAdapter
@@ -71,6 +74,24 @@ private RecyclerView rvSetting;
                     requireActivity().getSupportFragmentManager()
                             .beginTransaction()
                             .replace(R.id.fragment_container, esp32Access)
+                            .addToBackStack(null)
+                            .commit();
+                    break;
+
+                case "Sensors Maintenance":
+                    Fragment sensorMaintenance = new SensorMaitenanceInstructionFragment();
+                    requireActivity().getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragment_container, sensorMaintenance)
+                            .addToBackStack(null)
+                            .commit();
+                    break;
+
+                case "Maintenance Logs":
+                    Fragment maintenanceLogs = new MaintenanceLogsFragment();
+                    requireActivity().getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragment_container, maintenanceLogs)
                             .addToBackStack(null)
                             .commit();
                     break;
