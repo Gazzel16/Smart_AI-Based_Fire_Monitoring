@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.example.smartai_basedfiremonitoring.Model.User;
 import com.example.smartai_basedfiremonitoring.R;
@@ -34,6 +35,8 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up);
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         usernameEditText = findViewById(R.id.username);
         emailEditText = findViewById(R.id.email);

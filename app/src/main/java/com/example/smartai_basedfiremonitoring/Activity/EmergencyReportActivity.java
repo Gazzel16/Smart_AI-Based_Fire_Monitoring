@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.example.smartai_basedfiremonitoring.Model.FireReport;
 import com.example.smartai_basedfiremonitoring.Model.User;
@@ -30,6 +31,7 @@ public class EmergencyReportActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_emergency_report);
 
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         EmergencyReport();
     }
 

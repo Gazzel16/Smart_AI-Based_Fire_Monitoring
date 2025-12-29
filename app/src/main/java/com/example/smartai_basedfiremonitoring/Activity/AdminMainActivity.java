@@ -3,6 +3,7 @@ package com.example.smartai_basedfiremonitoring.Activity;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
 import com.example.smartai_basedfiremonitoring.Fragments.AdminFragments.AdminDashboardFragment;
@@ -17,7 +18,7 @@ public class AdminMainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         // Enable Edge-to-Edge
         androidx.activity.EdgeToEdge.enable(this);
 
