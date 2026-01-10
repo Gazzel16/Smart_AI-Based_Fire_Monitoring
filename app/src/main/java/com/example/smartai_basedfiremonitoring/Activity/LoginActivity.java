@@ -54,10 +54,6 @@ public class LoginActivity extends AppCompatActivity {
         String email = emailEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
 
-        if(email.equals("admin@gmail.com") && password.equals("123456")){
-            Intent intent = new Intent(LoginActivity.this, AdminMainActivity.class); // Replace with your main activity
-            startActivity(intent);
-        }
         // ✅ Input validation
         if (email.isEmpty()) {
             emailEditText.setError("Please enter your email");
