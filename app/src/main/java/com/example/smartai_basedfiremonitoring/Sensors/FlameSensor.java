@@ -70,6 +70,10 @@ public class FlameSensor {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("sensors");
         flameListener = new ValueEventListener() {
             private MediaPlayer mediaPlayer;
+            private boolean alertPlayed = false;
+
+            private android.os.Handler handler = new android.os.Handler();
+            private Runnable logRunnable;
 
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -85,18 +89,44 @@ public class FlameSensor {
                     if (flameSensor != null && flameSensor) {
                         flameDetector.setText("Flame Detected!");
 
-                        Context context = fragment.getContext();
-                        if (context != null) {
-                            SoundManager.getInstance(context).playSound(R.raw.fire_detected_voiceline);
-                            showNotification(context,
-                                    "⚠️ Fire Detected",
-                                    "A fire has been reported in Barangay Ilaya Alabang. Residents in the affected and nearby areas are advised to evacuate immediately to the nearest safe evacuation center. Please bring only essential belongings, assist children, elderly, and persons with disabilities, and follow instructions from local authorities and emergency responders.\n⚠️ Stay away from the fire-affected zone for your safety.");
 
-                            sendAlertToBackend();
+                        if (!alertPlayed) {  // ✅ Only play once
+                            Context context = fragment.getContext();
+                            if (context != null) {
+                                SoundManager.getInstance(context)
+                                        .playSound(R.raw.fire_detected_voiceline);
+
+                                showNotification(context,
+                                        "⚠️ Fire Detected",
+                                        "A fire has been reported in Barangay Ilaya Alabang. Residents in the affected and nearby areas are advised to evacuate immediately...");
+
+                                sendAlertToBackend();
+                            }
+                            alertPlayed = true;
+                        }
+
+                        if (logRunnable == null) {
+                            logRunnable = new Runnable() {
+                                @Override
+                                public void run() {
+                                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+                                    sdf.setTimeZone(TimeZone.getTimeZone("Asia/Manila"));
+                                    String currentTime = sdf.format(new Date());
+                                    fireLogsRef.push().setValue(currentTime); // ----------------------- NEW: log fire
+
+                                    // Repeat every 30 seconds
+                                    handler.postDelayed(this, 30000);
+                                }
+                            };
+                            handler.post(logRunnable);
                         }
                     } else {
                         flameDetector.setText("No Flame Detected!");
 
+                        if (logRunnable != null) {
+                            handler.removeCallbacks(logRunnable);
+                            logRunnable = null;
+                        }
 
                         if (mediaPlayer != null && mediaPlayer.isPlaying()) {
                             mediaPlayer.stop();
